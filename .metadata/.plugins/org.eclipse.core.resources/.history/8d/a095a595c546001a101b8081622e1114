@@ -1,0 +1,8 @@
+package com.developpez.tomcat;
+
+import javax.servlet.http.HttpServlet;
+
+public class SimpleServlet extends HttpServlet {
+	
+	
+}

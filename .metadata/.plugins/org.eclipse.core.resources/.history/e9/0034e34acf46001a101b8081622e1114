@@ -1,0 +1,14 @@
+package services;
+
+import com.services.Operation;
+
+public class TestOperation {
+
+	public static void main(String[] args) {
+		Operation op = new Operation();
+		String c = "k";
+		System.out.println(op.operation(2,3,"+"));
+
+	}
+
+}

@@ -1,0 +1,43 @@
+package com.developpez.tomcat;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+public class Addition extends HttpServlet {
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		
+		int a = Integer.parseInt(req.getParameter("num1"));
+		int b = Integer.parseInt(req.getParameter("num2"));
+		String op = req.getParameter("op");
+		
+		PrintWriter out = resp.getWriter();
+		out.println(a+" "+op+" "+b);
+		out.println(operation(a,b,op));
+	}
+	
+	private int operation(int a, int b, String c) {
+		if(c=="*") {
+			return a*b;
+		} 
+		if (c=="-") {
+			return a-b;
+		}
+		if (c=="/") {
+			return a/b;
+		}
+		if (c=="+") {
+			return a+b;
+		}
+		return Integer.MIN_VALUE;
+	}
+	
+}

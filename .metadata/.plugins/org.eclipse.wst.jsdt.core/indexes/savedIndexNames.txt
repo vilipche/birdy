@@ -1,0 +1,8 @@
+INDEX VERSION 1.4+/home/filip/Documents/LU3IN017/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
+3927879410.index
+1481710229.index
+489268783.index
+4248624313.index
+2634965556.index
+3880624549.index
+1229607591.index

@@ -1,0 +1,19 @@
+package com.services;
+
+public class Operation {
+	public int operation(int a, int b, String c) {
+		if(c=="*") {
+			return a*b;
+		} 
+		if (c=="-") {
+			return a-b;
+		}
+		if (c=="/") {
+			return a/b;
+		}
+		if (c=="+") {
+			return a+b;
+		}
+		return Integer.MIN_VALUE;
+	}
+}
