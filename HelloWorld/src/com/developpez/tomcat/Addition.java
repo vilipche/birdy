@@ -28,7 +28,6 @@ public class Addition extends HttpServlet {
 		out.println(o.isEmpty());
 		out.println(o.toString());
 		
-		
 		out.println(a+" "+o+" "+b);
 		out.println(op.operation(a,b,o));
 	}
