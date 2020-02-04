@@ -5,7 +5,7 @@ public class TestOperation {
 	public static void main(String[] args) {
 		Operation op = new Operation();
 		String c = "k";
-		System.out.println(op.operation(2,3,"+"));
+		System.out.println(op.operation(2,3,"add"));
 
 	}
 
