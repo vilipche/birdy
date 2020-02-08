@@ -1,5 +1,6 @@
 package com.services;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.tools.ErrorJSON;
@@ -22,21 +23,37 @@ public class CreateUser {
 	public static JSONObject newUser(String username, String email, 
 			String password, String name, String surname, int age) {
 		
-		
-		
-		//connect to DB
-		//check if username and email are in the database
-		
-		//check if query for creation returns true or false
-		//if returns false
-		//return ErrorJSON.serviceRefused("User creation unsucsessful",-1);
-		//else
-		//return ErrorJSON.serviceAccepted();
-		
-		
-		
+		if(username == null || email == null || password == null || name == null || surname == null || age == null) {
+			
+			try {
+				boolean is_username = UserTool.userExist(username);
+				if(is_username) {
+					return ErrorJSON.serviceRefused("User already taken", 0);
+				}
+				
+				boolean is_email = UserTool.userExist(email);
+				if(is_email) {
+					return ErrorJSON.serviceRefused("Email already taken", 0);
+				}
+				
+				boolean is_password_valid = UserTool.checkPasswordValid(password);
+				if(is_password_valid) {
+					return ErrorJSON.serviceRefused("Unvalid password format", 0);
+				}
+				
+				return ErrorJSON.serviceAccepted();
+			}
+			
+			catch (JSONException e) {
+				return ErrorJSON.serviceRefused(null, 0);
+			} catch (SQLException e) {
+				return ErrorJSON.serviceRefused(null, 0);
+			
+			}
+			
 	}
-	
+
+
 	private JSONObject checkPassword(String password) {
 		JSONObject json = new JSONObject();
 		if (password.length()>=8 && password.length()<=24) {
@@ -44,4 +61,10 @@ public class CreateUser {
 		} 
 		return ErrorJSON.serviceAccepted();
 	}
+
 }
+		
+		
+	
+	
+	
