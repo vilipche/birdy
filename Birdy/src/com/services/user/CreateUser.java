@@ -1,9 +1,10 @@
-package com.services;
+package com.services.user;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.tools.ErrorJSON;
+import com.tools.UserTool;
 
 /*
  * Nom du web service: CreateUser
@@ -21,10 +22,13 @@ import com.tools.ErrorJSON;
 public class CreateUser {
 
 	public static JSONObject newUser(String username, String email, 
-			String password, String name, String surname, int age) {
+			String password, String name, String surname) {
 		
-		if(username == null || email == null || password == null || name == null || surname == null || age == null) {
-			
+		if(username == null || email == null || password == null || name == null || surname == null) {
+			return ErrorJSON.serviceRefused("Missing argument", -1);
+		}
+		
+				
 			try {
 				boolean is_username = UserTool.userExist(username);
 				if(is_username) {
@@ -48,8 +52,8 @@ public class CreateUser {
 				return ErrorJSON.serviceRefused(null, 0);
 			} catch (SQLException e) {
 				return ErrorJSON.serviceRefused(null, 0);
-			
 			}
+		
 			
 	}
 
