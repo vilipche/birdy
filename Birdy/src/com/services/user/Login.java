@@ -19,7 +19,7 @@ import org.json.JSONObject;
 
 public class Login {
 
-	public static JSONObject Login(String email, String pass) {
+	public static JSONObject login(String email, String pass) {
 		if(log == null || pass == null) {
 			return ErrorJSON.serviceRefused("Mauvais arguments", -1);
 		}

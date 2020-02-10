@@ -41,7 +41,7 @@ public class CreateUser {
 				}
 				
 				boolean is_password_valid = UserTool.checkPasswordValid(password);
-				if(is_password_valid) {
+				if(!is_password_valid) {
 					return ErrorJSON.serviceRefused("Unvalid password format", 0);
 				}
 				
