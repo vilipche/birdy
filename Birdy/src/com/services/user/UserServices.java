@@ -58,7 +58,7 @@ public class UserServices {
 	}
 
 	public static JSONObject login(String login, String pass) {
-		if(log == null || pass == null) {
+		if(login == null || pass == null) {
 			return ErrorJSON.serviceRefused("Mauvais arguments", -1);
 		}
 		try {
