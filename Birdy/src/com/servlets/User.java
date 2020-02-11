@@ -24,7 +24,7 @@ public class User extends HttpServlet {
 		String name = req.getParameter("name");
 		String surname = req.getParameter("surname");
 		
-		JSONObject json = CreateUser.newUser(username, email, password, name, surname);
+		JSONObject json = UserServices.newUser(username, email, password, name, surname);
 		
 		PrintWriter out = resp.getWriter();
 

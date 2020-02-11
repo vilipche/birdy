@@ -19,7 +19,7 @@ import com.tools.UserTool;
  * Informations additionneles:
  */
 
-public class CreateUser {
+public class UserServices {
 
 	public static JSONObject newUser(String username, String email, 
 			String password, String name, String surname) {
@@ -57,7 +57,68 @@ public class CreateUser {
 			
 	}
 
+	public static JSONObject login(String login, String pass) {
+		if(log == null || pass == null) {
+			return ErrorJSON.serviceRefused("Mauvais arguments", -1);
+		}
+		try {
+			boolean is_user = UserTool.userExist(login);
 
+			if(is_user) {
+				return ErrorJSON.serviceRefused("No user in the db", 0);
+			}
+
+			boolean pass_ok = UserTool.checkPass(login, pass);
+
+			if(!pass_ok) {
+				return ErrorJSON.serviceRefused("Error password", 0);
+			}
+
+			UserTool.loginTime(login);
+
+			String key = UserTool.insertUser(login, pass);
+
+			return ErrorJSON.serviceAccepted();
+		} catch (JSONException e) {
+			return ErrorJSON.serviceRefused(null, 0);
+		} catch (SQLException e) {
+			return ErrorJSON.serviceRefused(null, 0);
+		}
+	}
+
+	public static JSONObject logout(String login) {
+		if(login == null) {
+			return ErrorJSON.serviceRefused("Mauvais arguments", -1);
+		}
+		
+		try {
+			
+			boolean is_user = UserTool.userExist(login);
+
+			if(!is_user) {
+				return ErrorJSON.serviceRefused("No user in the db", 0);
+			}
+			
+			UserTool.logoutTime(login);
+			
+			boolean isLoggedOut = UserTool.logoutUser(login);
+			
+			if(!isLoggedOut) {
+				return ErrorJSON.serviceRefused("User didn't log out ", 1000);	
+			}
+			
+			return ErrorJSON.serviceAccepted();
+		
+		} catch (JSONException e) {
+			return ErrorJSON.serviceRefused(null, 0);
+		} catch (SQLException e) {
+			return ErrorJSON.serviceRefused(null, 0);
+		}
+		
+		
+		
+	}
+	
 	private JSONObject checkPassword(String password) {
 		JSONObject json = new JSONObject();
 		if (password.length()>=8 && password.length()<=24) {

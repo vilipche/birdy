@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import com.services.friends.*;
-import com.services.user.CreateUser;
+
 
 public class Friends extends HttpServlet {
 
@@ -21,7 +21,7 @@ public class Friends extends HttpServlet {
 		String myUser = request.getParameter("myUser");
 		String userFriend = request.getParameter("userFriend");
 
-		JSONObject json = UnFriend.unFriend(myUser, userFriend);
+		JSONObject json = FriendServices.unFriend(myUser, userFriend);
 				PrintWriter out = response.getWriter();
 
 		out.println(json.toString());
@@ -32,7 +32,7 @@ public class Friends extends HttpServlet {
 
 		String userFriend = request.getParameter("userFriend");
 
-		JSONObject json = ListFriends.listFriends(userFriend);
+		JSONObject json = FriendServices.listFriends(userFriend);
 		PrintWriter out = response.getWriter();
 
 		out.println(json.toString());
@@ -44,7 +44,7 @@ public class Friends extends HttpServlet {
 		String myUser = request.getParameter("myUser");
 		String userFriend = request.getParameter("userFriend");
 
-		JSONObject json = AddFriend.addFriend(myUser, userFriend);
+		JSONObject json = FriendServices.addFriend(myUser, userFriend);
 
 		PrintWriter out = response.getWriter();
 

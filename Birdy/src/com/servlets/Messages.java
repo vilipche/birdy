@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.services.messages.*;
-import com.services.user.Logout;
+
 
 import org.json.JSONObject;
 
-import com.services.friends.UnFriend;
+
 
 public class Messages extends HttpServlet {
 	
@@ -23,7 +23,7 @@ public class Messages extends HttpServlet {
 		String message = request.getParameter("message");
 
 
-		JSONObject json = RemoveMessage.removeMessage(user, message);
+		JSONObject json = MessageServices.removeMessage(user, message);
 				
 		PrintWriter out = response.getWriter();
 		out.println(json.toString());
@@ -34,7 +34,7 @@ public class Messages extends HttpServlet {
 
 
 
-		JSONObject json = ListMessages.listMessages(user);
+		JSONObject json = MessageServices.listMessages(user);
 				
 		PrintWriter out = response.getWriter();
 		out.println(json.toString());
@@ -45,7 +45,7 @@ public class Messages extends HttpServlet {
 		String myUser = request.getParameter("myUser");
 		String message = request.getParameter("message");
 
-		JSONObject json = AddMessage.addMessage(myUser, message);			
+		JSONObject json = MessageServices.addMessage(myUser, message);			
 		PrintWriter out = response.getWriter();
 		out.println(json.toString());
 	}

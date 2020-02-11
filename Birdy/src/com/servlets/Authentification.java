@@ -21,7 +21,7 @@ public class Authentification extends HttpServlet {
 		String login = request.getParameter("email");
 
 
-		JSONObject json = Logout.Logout(login);
+		JSONObject json = UserServices.logout(login);
 		PrintWriter out = response.getWriter();
 		out.println(json.toString());
 
@@ -32,7 +32,7 @@ public class Authentification extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 
-		JSONObject json = Login.login(email, password);
+		JSONObject json = UserServices.login(email, password);
 		PrintWriter out = response.getWriter();
 
 		out.println(json.toString());
