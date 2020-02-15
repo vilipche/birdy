@@ -11,8 +11,8 @@ public class MessageTool {
 
 	public static boolean addMessage(String myUser, String message) {
 		boolean isOK;
-//		isOK = databse function that adds the message
-		
+		//		isOK = databse function that adds the message
+
 		if(!isOK) {
 			return false;
 		}
@@ -21,8 +21,8 @@ public class MessageTool {
 
 	public static boolean findMessage(String user, String message) {
 		boolean isOK;
-//		isOK = databse function that finds the message
-		
+		//		isOK = databse function that finds the message
+
 		if(!isOK) {
 			return false;
 		}
@@ -31,8 +31,8 @@ public class MessageTool {
 
 	public static boolean removeMessage(String user, String message) {
 		boolean isOK;
-//		isOK = databse function that remvoes the message
-		
+		//		isOK = databse function that remvoes the message
+
 		if(!isOK) {
 			return false;
 		}
@@ -41,13 +41,12 @@ public class MessageTool {
 
 	public static boolean getListMessages(String user) {
 		boolean isOK;
-//		isOK = databse function that gets the list of messages of a user
-		
+		//		isOK = databse function that gets the list of messages of a user
+
 		if(!isOK) {
 			return false;
 		}
 		return true;
 	}
-	}
-
 }
+
