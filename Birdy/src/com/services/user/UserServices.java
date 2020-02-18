@@ -25,7 +25,7 @@ import com.tools.UserTool;
 public class UserServices {
 
 	public static JSONObject newUser(String username, String email, 
-			String password, String name, String surname)  {
+			String password, String name, String surname)   {
 
 		if(username == null || email == null || password == null || name == null || surname == null) {
 			return ErrorJSON.serviceRefused("Missing argument", -1);
@@ -60,9 +60,7 @@ public class UserServices {
 			return ErrorJSON.serviceAccepted();
 		}
 
-		catch (JSONException e) {
-			return ErrorJSON.serviceRefused(null, 0);
-		} catch (SQLException e) {
+		catch (SQLException e) {
 			return ErrorJSON.serviceRefused(null, 0);
 		}
 		finally {
@@ -78,7 +76,7 @@ public class UserServices {
 
 	}
 
-	public static JSONObject login(String login, String pass) {
+	public static JSONObject login(String login, String pass)  {
 		if(login == null || pass == null) {
 			return ErrorJSON.serviceRefused("Mauvais arguments", -1);
 		}
@@ -101,14 +99,12 @@ public class UserServices {
 				return ErrorJSON.serviceRefused("Error password", 0);
 			}
 
-			//TODO Da ja napravam funikcijava za login, hash kod?
-			UserTool.loginTime(login);
+			UserTool.insertSession(login);
 
 			return ErrorJSON.serviceAccepted();
 
-		} catch (JSONException e) {
-			return ErrorJSON.serviceRefused(null, 0);
-		} catch (SQLException e) {
+		}
+		catch (SQLException e) {
 			return ErrorJSON.serviceRefused(null, 0);
 		}
 		finally {
@@ -122,7 +118,7 @@ public class UserServices {
 		}
 	}
 
-	public static JSONObject logout(String login) {
+	public static JSONObject logout(String login)  {
 		if(login == null) {
 			return ErrorJSON.serviceRefused("Mauvais arguments", -1);
 		}
@@ -153,8 +149,7 @@ public class UserServices {
 
 			return ErrorJSON.serviceAccepted();
 
-		} catch (JSONException e) {
-			return ErrorJSON.serviceRefused(null, 0);
+
 		} catch (SQLException e) {
 			return ErrorJSON.serviceRefused(null, 0);
 		} 

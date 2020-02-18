@@ -14,7 +14,7 @@ import com.tools.UserTool;
 public class FriendServices {
 	//TODO kako ke raboti so unidirectional?
 
-	public static JSONObject unFriend(String myUser, String userFriend) {
+	public static JSONObject unFollow(String myUser, String userFriend)  {
 				
 		Connection connexion = null;
 
@@ -31,25 +31,23 @@ public class FriendServices {
 				return ErrorJSON.serviceRefused("User doesn't exist", 0);
 			}
 
-			boolean friendCheck = FriendTool.friendshipExist(connexion, myUser, userFriend);
+			boolean followCheck = FriendTool.followExist(connexion, myUser, userFriend);
 
-			if(!friendCheck) {
-				return ErrorJSON.serviceRefused("You are not friend with the person", 0);
+			if(!followCheck) {
+				return ErrorJSON.serviceRefused("You are not following this person", 0);
 			}
 
-			boolean removeOK = FriendTool.removeFriend(connexion, myUser, userFriend);
+			boolean removeOK = FriendTool.unfollow(connexion, myUser, userFriend);
 
 			if(!removeOK) {
-				return ErrorJSON.serviceRefused("Error while removing friend", 0);
+				return ErrorJSON.serviceRefused("Error while unfollowing friend", 0);
 			}
 
 
 			return ErrorJSON.serviceAccepted();
 
 
-		} catch (JSONException e) {
-			return ErrorJSON.serviceRefused(null, 0);
-		} catch (SQLException e) {
+		catch (SQLException e) {
 			return ErrorJSON.serviceRefused(null, 0);
 		}
 		finally {
@@ -63,7 +61,8 @@ public class FriendServices {
 		}
 	}
 
-	public static JSONObject listFriends(String user) {
+	public static JSONObject listFriends(String user)  {
+		//TODO
 		Connection connexion = null;
 		try {
 
@@ -89,9 +88,8 @@ public class FriendServices {
 			return ErrorJSON.serviceAccepted();
 
 		}
-		catch (JSONException e) {
-			return ErrorJSON.serviceRefused(null, 0);
-		} catch (SQLException e) {
+
+		catch (SQLException e) {
 			return ErrorJSON.serviceRefused(null, 0);
 		}
 		finally {
@@ -106,7 +104,7 @@ public class FriendServices {
 
 	}
 	
-	public static JSONObject addFriend(String myUser, String userFriend ) {
+	public static JSONObject follow(String myUser, String userFriend )  {
 		
 		Connection connexion = null;
 		try {
@@ -115,7 +113,7 @@ public class FriendServices {
 				return ErrorJSON.serviceRefused("Mauvais arguments", -1);
 			}
 			
-			connexion= Database.getMySQLConnection();
+			connexion = Database.getMySQLConnection();
 			
 			boolean userCheck = UserTool.userExist(connexion, userFriend);		
 			
@@ -123,13 +121,13 @@ public class FriendServices {
 				return ErrorJSON.serviceRefused("User doesn't exist", 0);
 			}
 			
-			boolean friendCheck = FriendTool.friendshipExist(connexion, myUser, userFriend);
+			boolean friendCheck = FriendTool.followExist(connexion, myUser, userFriend);
 			
-			if(!friendCheck) {
-				return ErrorJSON.serviceRefused("You are not friends with the person", 0);
+			if(friendCheck) {
+				return ErrorJSON.serviceRefused("You are already following the person", 0);
 			}
 			
-			boolean addOK = FriendTool.addFriend(connexion, myUser, userFriend);
+			boolean addOK = FriendTool.followUser(connexion, myUser, userFriend);
 	
 			if(!addOK) {
 				return ErrorJSON.serviceRefused("Error while adding friend", 0);
@@ -138,10 +136,8 @@ public class FriendServices {
 			
 			return ErrorJSON.serviceAccepted();
 			
-			
-		} catch (JSONException e) {
-			return ErrorJSON.serviceRefused(null, 0);
-		} catch (SQLException e) {
+		}
+		catch (SQLException e) {
 			return ErrorJSON.serviceRefused(null, 0);
 		}
 		finally {

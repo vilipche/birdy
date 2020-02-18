@@ -26,8 +26,7 @@ public class ServicesTestBD {
 
 
 		try {
-			System.out.println("Lasds");
-
+			
 			boolean a;
 			Connection connexion = Database.getMySQLConnection();
 //			UserTool
@@ -69,8 +68,8 @@ public class ServicesTestBD {
 //			
 //			System.out.println(FriendTool.friendshipExist(connexion, "toto", "vilipche"));
 //			System.out.println(FriendTool.friendshipExist(connexion, "vilipche", "toto"));
-
-			
+//
+//			
 			//TODO problem imam so remove
 //			System.out.println(FriendTool.removeFriend(connexion, "vilipche", "toto"));
 //			System.out.println(FriendTool.removeFriend(connexion, "toto", "vilipche"));
@@ -78,6 +77,18 @@ public class ServicesTestBD {
 //			System.out.println(FriendTool.friendshipExist(connexion, "toto", "vilipche"));
 //			System.out.println(FriendTool.friendshipExist(connexion, "vilipche", "toto"));
 
+//			System.out.println(FriendTool.getUserID(connexion, "toto"));
+//			System.out.println(FriendTool.followUser(connexion, "toto", "vilipche"));
+//			System.out.println(FriendTool.followExist(connexion, "toto", "vilipche"));
+			
+//			System.out.println(FriendTool.unfollow(connexion, "toto", "vilipche"));
+			
+			
+//			System.out.println(FriendTool.followExist(connexion, "toto", "vilipche"));
+			
+			
+			
+			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

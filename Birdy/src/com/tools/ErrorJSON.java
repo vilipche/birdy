@@ -1,11 +1,12 @@
 package com.tools;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ErrorJSON {
 	
 	
-	public static JSONObject serviceRefused(String message, int codeErreur) {
+	public static JSONObject serviceRefused(String message, int codeErreur)  {
 		
 		JSONObject json = new JSONObject();
 		
@@ -28,19 +29,26 @@ public class ErrorJSON {
 		    System.out.println(message);
 		    break;
 		}
-		
-		json.put("codeErreur",codeErreur);
-		json.put("message", message);
-		json.put("status", "KO");
-		
-		
+
+			try {
+				json.put("codeErreur",codeErreur);
+				json.put("message", message);
+				json.put("status", "KO");	
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+
 		return json;
 
 	}
 	
-	public static JSONObject serviceAccepted() {
+	public static JSONObject serviceAccepted()  {
 		JSONObject json = new JSONObject();
-		json.put("status", "OK");
+		try {
+			json.put("status", "OK");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 		return json;
 				
 	}

@@ -6,25 +6,25 @@ import java.sql.Statement;
 
 public class FriendTool {
 
-	public static String getUserID(Connection connexion, String user) throws SQLException {
+	public static int getUserID(Connection connexion, String user) throws SQLException {
 		// TODO     
 		String query = "Select idUser From User Where username='"+user+"'";
 
 		Statement lecture = connexion.createStatement();
 		ResultSet rs = lecture.executeQuery(query);
 
-		String id = null; //TODO dali e dobro vaka
+		int id = -1; 
 		while(rs.next()) {
-			 id = rs.getString("idUser");
+			 id = rs.getInt("idUser");
 		}
 		return id;
 	}
 	
-	public static boolean friendshipExist(Connection connexion, String myUser, String userFriend) throws SQLException {
+	public static boolean followExist(Connection connexion, String myUser, String userFollowing) throws SQLException {
 		// TODO checks if both arguments are friends in the database;
-		String idUser1 = getUserID(connexion, myUser);
-		String idUser2 = getUserID(connexion, userFriend);
-		String query = "Select * From Friends Where idUser1='"+idUser1+"' AND idUser2='"+idUser2+"'";
+		int idMyUser = getUserID(connexion, myUser);
+		int idUserFollowing = getUserID(connexion, userFollowing);
+		String query = "Select * From Followers Where idUser='"+idMyUser+"' AND idFollowing='"+idUserFollowing+"'";
 
 		Statement lecture = connexion.createStatement();
 		ResultSet rs = lecture.executeQuery(query);
@@ -35,38 +35,38 @@ public class FriendTool {
 		return false;
 	}
 
-	public static boolean addFriend(Connection connexion, String myUser, String userFriend) throws SQLException {
+	public static boolean followUser(Connection connexion, String myUser, String userFollow) throws SQLException {
 
 
-		String idUser1 = getUserID(connexion, myUser);
-		String idUser2 = getUserID(connexion, userFriend);
-		String insert = "INSERT INTO Friends(idUser1, idUser2) VALUES ('"+idUser1+"', '"+idUser2+"')";
+		int idMyUser = getUserID(connexion, myUser);
+		int idUserFollowing = getUserID(connexion, userFollow);
+		String insert = "INSERT INTO Followers(idUser, idFollowing) VALUES ('"+idMyUser+"', '"+idUserFollowing+"')";
 
 		Statement lecture = connexion.createStatement();
 		int rs = lecture.executeUpdate(insert);
 
 		if(rs!=0) {
-			return false;
+			return true;
 		}
 		
-		return true;
+		return false;
 	}
 
 
-	public static boolean removeFriend(Connection connexion, String myUser, String userFriend) throws SQLException {
-		String idUser1 = getUserID(connexion, myUser);
-		String idUser2 = getUserID(connexion, userFriend);
+	public static boolean unfollow(Connection connexion, String myUser, String userFollow) throws SQLException {
+		int idMyUser = getUserID(connexion, myUser);
+		int idUserFollowing = getUserID(connexion, userFollow);
 		
-		String delete = "DELETE FROM Friends WHEER idUser1='"+idUser1+"' AND 'idUser2='"+idUser2+"'";
+		String delete = "DELETE FROM Followers WHERE idUser="+idMyUser+" AND idFollowing="+idUserFollowing;
 
 		Statement lecture = connexion.createStatement();
 		int rs = lecture.executeUpdate(delete);
 
 		if(rs!=0) {
-			return false;
+			return true;
 		}
 		
-		return true;
+		return false;
 	}
 
 	public static boolean getListFriends(Connection connexion, String user) {

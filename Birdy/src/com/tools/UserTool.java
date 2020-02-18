@@ -103,9 +103,10 @@ public class UserTool {
 
 	}
 	
-	public static boolean loginTime(String login) {
+	public static boolean insertSession(String login) {
+				
 		return false;
-		//add the time when the log in happened;
+		
 	}
 
 	public static boolean logoutUser(Connection connexion, String login) {

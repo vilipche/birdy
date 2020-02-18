@@ -21,7 +21,7 @@ public class Friends extends HttpServlet {
 		String myUser = request.getParameter("myUser");
 		String userFriend = request.getParameter("userFriend");
 
-		JSONObject json = FriendServices.unFriend(myUser, userFriend);
+		JSONObject json = FriendServices.unFollow(myUser, userFriend);
 				PrintWriter out = response.getWriter();
 
 		out.println(json.toString());
@@ -44,7 +44,7 @@ public class Friends extends HttpServlet {
 		String myUser = request.getParameter("myUser");
 		String userFriend = request.getParameter("userFriend");
 
-		JSONObject json = FriendServices.addFriend(myUser, userFriend);
+		JSONObject json = FriendServices.follow(myUser, userFriend);
 
 		PrintWriter out = response.getWriter();
 
