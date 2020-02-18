@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 17, 2020 at 08:15 PM
+-- Generation Time: Feb 18, 2020 at 05:54 PM
 -- Server version: 5.7.22
--- PHP Version: 7.3.11-1~deb10u1
+-- PHP Version: 7.0.33-0+deb9u6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,44 +23,25 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Connexion`
+-- Table structure for table `Followers`
 --
 
-CREATE TABLE `Connexion` (
+CREATE TABLE `Followers` (
   `idUser` int(11) NOT NULL,
-  `authentificationKey` varchar(64) NOT NULL,
-  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Friends`
---
-
-CREATE TABLE `Friends` (
-  `idUser1` int(11) NOT NULL,
-  `idUser2` int(11) NOT NULL,
+  `idFollowing` int(11) NOT NULL,
   `dateFriendship` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `Friends`
---
-
-INSERT INTO `Friends` (`idUser1`, `idUser2`, `dateFriendship`) VALUES
-(11, 9, '2020-02-17 20:10:15');
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Messages`
+-- Table structure for table `Session`
 --
 
-CREATE TABLE `Messages` (
+CREATE TABLE `Session` (
   `idUser` int(11) NOT NULL,
-  `content` text NOT NULL,
-  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `key` varchar(32) NOT NULL,
+  `dateLogin` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -91,25 +72,19 @@ INSERT INTO `User` (`idUser`, `email`, `username`, `name`, `surname`, `password`
 --
 
 --
--- Indexes for table `Connexion`
+-- Indexes for table `Followers`
 --
-ALTER TABLE `Connexion`
-  ADD PRIMARY KEY (`idUser`,`authentificationKey`),
-  ADD KEY `idUser` (`idUser`);
+ALTER TABLE `Followers`
+  ADD PRIMARY KEY (`idUser`,`idFollowing`),
+  ADD KEY `idUser` (`idUser`),
+  ADD KEY `idFollowing` (`idFollowing`);
 
 --
--- Indexes for table `Friends`
+-- Indexes for table `Session`
 --
-ALTER TABLE `Friends`
-  ADD PRIMARY KEY (`idUser1`,`idUser2`),
-  ADD KEY `idUser2` (`idUser2`),
-  ADD KEY `idUser1` (`idUser1`) USING BTREE;
-
---
--- Indexes for table `Messages`
---
-ALTER TABLE `Messages`
+ALTER TABLE `Session`
   ADD PRIMARY KEY (`idUser`),
+  ADD UNIQUE KEY `key` (`key`),
   ADD KEY `idUser` (`idUser`);
 
 --
@@ -134,23 +109,17 @@ ALTER TABLE `User`
 --
 
 --
--- Constraints for table `Connexion`
+-- Constraints for table `Followers`
 --
-ALTER TABLE `Connexion`
-  ADD CONSTRAINT `Connexion_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `User` (`idUser`);
+ALTER TABLE `Followers`
+  ADD CONSTRAINT `Followers_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `User` (`idUser`),
+  ADD CONSTRAINT `Followers_ibfk_2` FOREIGN KEY (`idFollowing`) REFERENCES `User` (`idUser`);
 
 --
--- Constraints for table `Friends`
+-- Constraints for table `Session`
 --
-ALTER TABLE `Friends`
-  ADD CONSTRAINT `Friends_ibfk_1` FOREIGN KEY (`idUser1`) REFERENCES `User` (`idUser`),
-  ADD CONSTRAINT `Friends_ibfk_2` FOREIGN KEY (`idUser2`) REFERENCES `User` (`idUser`);
-
---
--- Constraints for table `Messages`
---
-ALTER TABLE `Messages`
-  ADD CONSTRAINT `Messages_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `User` (`idUser`);
+ALTER TABLE `Session`
+  ADD CONSTRAINT `Session_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `User` (`idUser`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
