@@ -89,7 +89,7 @@ public class UserTool {
 	public static boolean insertUser(Connection connexion, String username, String email, 
 			String password, String name, String surname) throws SQLException {
 		String insert = "INSERT INTO User(email, username, name, surname, password) "
-				+ "VALUES ('"+email+"', '"+username+"', '"+name+"', '"+surname+"','"+password+"')";
+				+ "VALUES ('"+email+"', '"+username+"', '"+name+"', '"+surname+"','"+password+"');";
 
 		Statement lecture = connexion.createStatement();
 		int rs = lecture.executeUpdate(insert);
@@ -101,6 +101,34 @@ public class UserTool {
 		
 		return false;
 
+	}
+
+	public static boolean deleteUser(Connection connexion, String user) throws SQLException {
+		
+		int idUser = DBTool.getUserID(connexion, user);
+		String delete = "DELETE FROM User WHERE idUser="+idUser+";";
+
+		Statement lecture = connexion.createStatement();
+		int rs = lecture.executeUpdate(delete);
+
+		if(rs!=0) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public static boolean checkPasswordExist(Connection connexion, String username, String password) throws SQLException {
+		String query = "Select * From User u "
+				+ "Where u.username='"+username+"' AND u.password='"+password+"';";
+
+		Statement lecture = connexion.createStatement();
+		ResultSet rs = lecture.executeQuery(query);
+
+		while(rs.next()) {
+			return true;
+		}
+		return false;
 	}
 	
 

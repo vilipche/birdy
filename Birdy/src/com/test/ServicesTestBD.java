@@ -11,7 +11,9 @@ import java.sql.Statement;
 
 import com.bd.DBStatic;
 import com.bd.Database;
+import com.services.friends.FriendServices;
 import com.services.session.SessionServices;
+import com.services.user.UserServices;
 
 public class ServicesTestBD {
 
@@ -19,69 +21,21 @@ public class ServicesTestBD {
 
 		try {
 			
-			boolean a;
 			Connection connexion = Database.getMySQLConnection();
-//			UserTool
-//			a = UserTool.insertUser(connexion, "adsda", "asdasd@gmail.com", "123ABCabc", "Filip", "Sotiroski");
-//			System.out.println(a);
-//
-//			a = UserTool.usernameExist(connexion, "vilipche");
-//			System.out.println(a);
-
-//			a = UserTool.emailExist(connexion, "filipsotiroski@gmail.com");
-//			System.out.println(a);
-//			
-//			a = UserTool.emailExist(connexion, "filipsotiroski@hotmail.com");
-//			System.out.println(a);
-
-//			a = UserTool.userExist(connexion, "vilipche");
-//			System.out.println(a);
-//			a = UserTool.userExist(connexion, "filipsotiroski@hotmail.com");
-//			System.out.println(a);
+			//UserServices -> Works
+//			System.out.println(UserServices.newUser("a", "a", "Aaaaaaaa123", "Aa", "Aaa"));
+//			System.out.println(UserServices.removeUser("a", "a", "Aaaaaaaa123"));
 			
-//			System.out.println(UserTool.checkPasswordValid("asd"));
-//			System.out.println(UserTool.checkPasswordValid("@FFFFFFFFF"));
-//			System.out.println(UserTool.checkPasswordValid("@123FSAasdasd"));
+			//SessionServices -> Works
+//			System.out.println(SessionServices.login("a", "Aaaaaaaa123"));
+//			System.out.println(SessionServices.logout("a"));
 			
+			//FriendServices -> Works
+//			System.out.println(FriendServices.follow("a", "toto"));
+//			System.out.println(FriendServices.unFollow("a", "toto"));
 			
-//			a = UserTool.checkPass(connexion, "filipsotiroski@gmail.com", "123ABCabc");
-//			System.out.println(a);
-			
-//			FriendTool
-//			a = UserTool.insertUser(connexion, "toto", "toto@gmail.com", "123ABCabc", "Toto", "Toti");
-//			System.out.println(a);
-			
-//			System.out.println(FriendTool.getUserID(connexion, "totao"));
-			
-//			System.out.println(FriendTool.friendshipExist(connexion, "toto", "vilipche"));
-//			System.out.println(FriendTool.friendshipExist(connexion, "vilipche", "toto"));
-//			
-//			System.out.println(FriendTool.addFriend(connexion, "toto", "vilipche"));
-//			
-//			System.out.println(FriendTool.friendshipExist(connexion, "toto", "vilipche"));
-//			System.out.println(FriendTool.friendshipExist(connexion, "vilipche", "toto"));
-//
-//			
-			//TODO problem imam so remove
-//			System.out.println(FriendTool.removeFriend(connexion, "vilipche", "toto"));
-//			System.out.println(FriendTool.removeFriend(connexion, "toto", "vilipche"));
-//			
-//			System.out.println(FriendTool.friendshipExist(connexion, "toto", "vilipche"));
-//			System.out.println(FriendTool.friendshipExist(connexion, "vilipche", "toto"));
-
-//			System.out.println(FriendTool.getUserID(connexion, "toto"));
-//			System.out.println(FriendTool.followUser(connexion, "toto", "adsda"));
-//			System.out.println(FriendTool.followExist(connexion, "toto", "vilipche"));
-			
-//			System.out.println(FriendTool.unfollow(connexion, "toto", "vilipche"));
-			
-			
-//			System.out.println(FriendTool.followExist(connexion, "toto", "vilipche"));
-			
-//			System.out.println(SessionTool.insertSession(connexion, "toto"));
-//			System.out.println(SessionTool.logoutUser(connexion, "toto"));
-			
-			
+			//On delete cascade -> Works
+//			System.out.println(UserServices.removeUser("a", "a", "Aaaaaaaa123"));
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -91,6 +45,8 @@ public class ServicesTestBD {
 
 	}
 
+	//some first local tests (not very useful now)
+	
 	public static void insertAuthentification(int user) {
 		try {
 			Random rand = new Random();

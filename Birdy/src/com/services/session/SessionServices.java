@@ -74,10 +74,6 @@ public class SessionServices {
 			}
 
 
-			//TODO funkcija za logout
-
-			UserTool.logoutTime(login);
-
 			boolean isLoggedOut = SessionTool.logoutUser(connexion, login);
 
 			if(!isLoggedOut) {

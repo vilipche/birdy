@@ -52,6 +52,10 @@ public class SessionTool {
 		
 		return false;
 	}
+	//TODO
+	public static boolean logoutUserKey(Connection connexion, String key) {
+		return false;
+	}
 
 
 	

@@ -62,48 +62,6 @@ public class FriendServices {
 		}
 	}
 
-	public static JSONObject listFriends(String user)  {
-		//TODO
-		Connection connexion = null;
-		try {
-
-			if(user == null) {
-				return ErrorJSON.serviceRefused("Mauvais arguments", -1);
-			}
-			
-			connexion= Database.getMySQLConnection();
-			
-			boolean userCheck = UserTool.userExist(connexion, user);		
-
-			if(!userCheck) {
-				return ErrorJSON.serviceRefused("User doesn't exist", 0);	
-			}
-			
-			//TODO KAKO?
-			boolean getOK = FriendTool.getListFriends(connexion, user);
-
-			if(!getOK) {
-				return ErrorJSON.serviceRefused("Error while getting list of friends", 0);
-			}
-
-			return ErrorJSON.serviceAccepted();
-
-		}
-
-		catch (SQLException e) {
-			return ErrorJSON.serviceRefused(null, 0);
-		}
-		finally {
-			try {
-				connexion.close();
-				//TODO dali e dobro vaka, dava problem so init
-			} catch (SQLException e) {
-				System.out.println("Failed to close the connection");
-				e.printStackTrace();
-			}
-		}
-
-	}
 	
 	public static JSONObject follow(String myUser, String userFriend )  {
 		
@@ -152,6 +110,49 @@ public class FriendServices {
 		}
 		
 	
+	}
+	
+	public static JSONObject listFriends(String user)  {
+		//TODO 
+		Connection connexion = null;
+		try {
+
+			if(user == null) {
+				return ErrorJSON.serviceRefused("Mauvais arguments", -1);
+			}
+			
+			connexion= Database.getMySQLConnection();
+			
+			boolean userCheck = UserTool.userExist(connexion, user);		
+
+			if(!userCheck) {
+				return ErrorJSON.serviceRefused("User doesn't exist", 0);	
+			}
+			
+			//TODO 
+			boolean getOK = FriendTool.getListFriends(connexion, user);
+
+			if(!getOK) {
+				return ErrorJSON.serviceRefused("Error while getting list of friends", 0);
+			}
+
+			return ErrorJSON.serviceAccepted();
+
+		}
+
+		catch (SQLException e) {
+			return ErrorJSON.serviceRefused(null, 0);
+		}
+		finally {
+			try {
+				connexion.close();
+				//TODO dali e dobro vaka, dava problem so init
+			} catch (SQLException e) {
+				System.out.println("Failed to close the connection");
+				e.printStackTrace();
+			}
+		}
+
 	}
 	
 }

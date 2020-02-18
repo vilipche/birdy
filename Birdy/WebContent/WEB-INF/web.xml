@@ -44,6 +44,7 @@
     <servlet-name>Athentification</servlet-name>
     <url-pattern>/athentification</url-pattern>
   </servlet-mapping>
+  
   <resource-ref>
     <description>DB Connection</description>
     <res-ref-name>jdbc/Database</res-ref-name>

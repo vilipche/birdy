@@ -75,6 +75,58 @@ public class UserServices {
 
 
 	}
+	
+	public static JSONObject removeUser(String username, String email, 
+			String password)   {
+
+		if(username == null || email == null || password == null ) {
+			return ErrorJSON.serviceRefused("Missing argument", -1);
+		}
+
+		Connection connexion = null;
+
+		try {	
+			connexion= Database.getMySQLConnection();
+
+			boolean is_username = UserTool.usernameExist(connexion, username);
+			if(!is_username) {
+				return ErrorJSON.serviceRefused("User doesn't exist", 0);
+			}
+
+			boolean is_email = UserTool.emailExist(connexion, email);
+			if(!is_email) {
+				return ErrorJSON.serviceRefused("Email doesn't exist", 0);
+			}
+
+			boolean is_password = UserTool.checkPasswordExist(connexion, username, password);
+			if(!is_password) {
+				return ErrorJSON.serviceRefused("Wrong password", 0);
+			}
+
+			boolean is_removed = UserTool.deleteUser(connexion, username);
+			
+			if(!is_removed) {
+				return ErrorJSON.serviceRefused("Couldn't remove user", 0);
+			}
+			
+			return ErrorJSON.serviceAccepted();
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+			return ErrorJSON.serviceRefused(null, 0);
+		}
+		finally {
+			try {
+				connexion.close();
+			} catch (SQLException e) {
+				System.out.println("Failed to close the connection");
+				e.printStackTrace();
+			}
+		}
+
+
+	}
 
 
 }

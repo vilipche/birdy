@@ -31,6 +31,19 @@ public class User extends HttpServlet {
 		out.println(json.toString());
 	}
 
+	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		String username = req.getParameter("username");
+		String email = req.getParameter("email");
+		String password = req.getParameter("password");
+
+		
+		JSONObject json = UserServices.removeUser(username, email, password);
+		
+		PrintWriter out = resp.getWriter();
+
+		out.println(json.toString());
+	}
 	
 	
 
