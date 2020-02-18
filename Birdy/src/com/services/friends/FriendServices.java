@@ -45,6 +45,7 @@ public class FriendServices {
 
 
 			return ErrorJSON.serviceAccepted();
+		}
 
 
 		catch (SQLException e) {

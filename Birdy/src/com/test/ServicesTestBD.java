@@ -11,26 +11,18 @@ import java.sql.Statement;
 
 import com.bd.DBStatic;
 import com.bd.Database;
+import com.services.session.SessionServices;
 
 public class ServicesTestBD {
 
 	public static void main(String[] args) {
-
-
-		//		insertUser("test1");
-		//		insertUser("test2");
-		//		insertFriend(5, 7);
-		//		insertMessages(5, "my message");
-		//		insertAuthentification(5);
-
-
 
 		try {
 			
 			boolean a;
 			Connection connexion = Database.getMySQLConnection();
 //			UserTool
-//			a = UserTool.insertUser(connexion, "vilipche", "filipsotiroski@gmail.com", "123ABCabc", "Filip", "Sotiroski");
+//			a = UserTool.insertUser(connexion, "adsda", "asdasd@gmail.com", "123ABCabc", "Filip", "Sotiroski");
 //			System.out.println(a);
 //
 //			a = UserTool.usernameExist(connexion, "vilipche");
@@ -78,7 +70,7 @@ public class ServicesTestBD {
 //			System.out.println(FriendTool.friendshipExist(connexion, "vilipche", "toto"));
 
 //			System.out.println(FriendTool.getUserID(connexion, "toto"));
-//			System.out.println(FriendTool.followUser(connexion, "toto", "vilipche"));
+//			System.out.println(FriendTool.followUser(connexion, "toto", "adsda"));
 //			System.out.println(FriendTool.followExist(connexion, "toto", "vilipche"));
 			
 //			System.out.println(FriendTool.unfollow(connexion, "toto", "vilipche"));
@@ -86,7 +78,8 @@ public class ServicesTestBD {
 			
 //			System.out.println(FriendTool.followExist(connexion, "toto", "vilipche"));
 			
-			
+//			System.out.println(SessionTool.insertSession(connexion, "toto"));
+//			System.out.println(SessionTool.logoutUser(connexion, "toto"));
 			
 			
 			

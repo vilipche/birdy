@@ -4,13 +4,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
+import com.services.session.SessionServices;
 import com.services.user.*;
 
 public class Authentification extends HttpServlet {
@@ -21,7 +22,7 @@ public class Authentification extends HttpServlet {
 		String login = request.getParameter("email");
 
 
-		JSONObject json = UserServices.logout(login);
+		JSONObject json = SessionServices.logout(login);
 		PrintWriter out = response.getWriter();
 		out.println(json.toString());
 
@@ -32,7 +33,7 @@ public class Authentification extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 
-		JSONObject json = UserServices.login(email, password);
+		JSONObject json = SessionServices.login(email, password);
 		PrintWriter out = response.getWriter();
 
 		out.println(json.toString());

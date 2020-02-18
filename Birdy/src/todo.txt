@@ -1,0 +1,3 @@
+- implementer mongodb
+- authentification services
+- tester les services en local

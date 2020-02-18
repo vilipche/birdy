@@ -103,21 +103,6 @@ public class UserTool {
 
 	}
 	
-	public static boolean insertSession(String login) {
-				
-		return false;
-		
-	}
-
-	public static boolean logoutUser(Connection connexion, String login) {
-		return false;
-		// TODO Log out the user from the site
-
-	}
-
-	public static void logoutTime(String login) {
-		// TODO add the time when the user logged out		
-	}
 
 
 

@@ -6,24 +6,12 @@ import java.sql.Statement;
 
 public class FriendTool {
 
-	public static int getUserID(Connection connexion, String user) throws SQLException {
-		// TODO     
-		String query = "Select idUser From User Where username='"+user+"'";
 
-		Statement lecture = connexion.createStatement();
-		ResultSet rs = lecture.executeQuery(query);
-
-		int id = -1; 
-		while(rs.next()) {
-			 id = rs.getInt("idUser");
-		}
-		return id;
-	}
 	
 	public static boolean followExist(Connection connexion, String myUser, String userFollowing) throws SQLException {
 		// TODO checks if both arguments are friends in the database;
-		int idMyUser = getUserID(connexion, myUser);
-		int idUserFollowing = getUserID(connexion, userFollowing);
+		int idMyUser = DBTool.getUserID(connexion, myUser);
+		int idUserFollowing = DBTool.getUserID(connexion, userFollowing);
 		String query = "Select * From Followers Where idUser='"+idMyUser+"' AND idFollowing='"+idUserFollowing+"'";
 
 		Statement lecture = connexion.createStatement();
@@ -38,8 +26,8 @@ public class FriendTool {
 	public static boolean followUser(Connection connexion, String myUser, String userFollow) throws SQLException {
 
 
-		int idMyUser = getUserID(connexion, myUser);
-		int idUserFollowing = getUserID(connexion, userFollow);
+		int idMyUser = DBTool.getUserID(connexion, myUser);
+		int idUserFollowing = DBTool.getUserID(connexion, userFollow);
 		String insert = "INSERT INTO Followers(idUser, idFollowing) VALUES ('"+idMyUser+"', '"+idUserFollowing+"')";
 
 		Statement lecture = connexion.createStatement();
@@ -54,8 +42,8 @@ public class FriendTool {
 
 
 	public static boolean unfollow(Connection connexion, String myUser, String userFollow) throws SQLException {
-		int idMyUser = getUserID(connexion, myUser);
-		int idUserFollowing = getUserID(connexion, userFollow);
+		int idMyUser = DBTool.getUserID(connexion, myUser);
+		int idUserFollowing = DBTool.getUserID(connexion, userFollow);
 		
 		String delete = "DELETE FROM Followers WHERE idUser="+idMyUser+" AND idFollowing="+idUserFollowing;
 
