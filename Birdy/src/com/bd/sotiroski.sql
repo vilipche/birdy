@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 17, 2020 at 03:47 PM
+-- Generation Time: Feb 17, 2020 at 08:15 PM
 -- Server version: 5.7.22
 -- PHP Version: 7.3.11-1~deb10u1
 
@@ -32,13 +32,6 @@ CREATE TABLE `Connexion` (
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `Connexion`
---
-
-INSERT INTO `Connexion` (`idUser`, `authentificationKey`, `date`) VALUES
-(5, '346', '2020-02-17 15:45:47');
-
 -- --------------------------------------------------------
 
 --
@@ -56,7 +49,7 @@ CREATE TABLE `Friends` (
 --
 
 INSERT INTO `Friends` (`idUser1`, `idUser2`, `dateFriendship`) VALUES
-(5, 7, '2020-02-17 15:30:11');
+(11, 9, '2020-02-17 20:10:15');
 
 -- --------------------------------------------------------
 
@@ -69,13 +62,6 @@ CREATE TABLE `Messages` (
   `content` text NOT NULL,
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `Messages`
---
-
-INSERT INTO `Messages` (`idUser`, `content`, `date`) VALUES
-(5, 'my message', '2020-02-17 15:35:46');
 
 -- --------------------------------------------------------
 
@@ -97,9 +83,8 @@ CREATE TABLE `User` (
 --
 
 INSERT INTO `User` (`idUser`, `email`, `username`, `name`, `surname`, `password`) VALUES
-(4, 'asdasd', 'asdasd', 'asdasda', 'asdasd', 'dasdw2'),
-(5, 'test2', 'test2', 'test2', 'test2', 'test2'),
-(7, 'test1', 'test1', 'test1', 'test1', 'test1');
+(9, 'filipsotiroski@gmail.com', 'vilipche', 'Filip', 'Sotiroski', '123ABCabc'),
+(11, 'toto@gmail.com', 'toto', 'Toto', 'Toti', '123ABCabc');
 
 --
 -- Indexes for dumped tables
@@ -131,7 +116,9 @@ ALTER TABLE `Messages`
 -- Indexes for table `User`
 --
 ALTER TABLE `User`
-  ADD PRIMARY KEY (`idUser`);
+  ADD PRIMARY KEY (`idUser`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -141,7 +128,7 @@ ALTER TABLE `User`
 -- AUTO_INCREMENT for table `User`
 --
 ALTER TABLE `User`
-  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- Constraints for dumped tables
 --
