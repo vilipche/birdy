@@ -9,7 +9,7 @@ public class DBTool {
 
 	public static int getUserID(Connection connexion, String user) throws SQLException {
 		// TODO     
-		String query = "Select idUser From User Where username='"+user+"'";
+		String query = "Select idUser From User Where username='"+user+"';";
 
 		Statement lecture = connexion.createStatement();
 		ResultSet rs = lecture.executeQuery(query);

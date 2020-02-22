@@ -12,7 +12,7 @@ public class FriendTool {
 		// TODO checks if both arguments are friends in the database;
 		int idMyUser = DBTool.getUserID(connexion, myUser);
 		int idUserFollowing = DBTool.getUserID(connexion, userFollowing);
-		String query = "Select * From Followers Where idUser='"+idMyUser+"' AND idFollowing='"+idUserFollowing+"'";
+		String query = "Select * From Followers Where idUser='"+idMyUser+"' AND idFollowing='"+idUserFollowing+"';";
 
 		Statement lecture = connexion.createStatement();
 		ResultSet rs = lecture.executeQuery(query);
@@ -28,7 +28,7 @@ public class FriendTool {
 
 		int idMyUser = DBTool.getUserID(connexion, myUser);
 		int idUserFollowing = DBTool.getUserID(connexion, userFollow);
-		String insert = "INSERT INTO Followers(idUser, idFollowing) VALUES ('"+idMyUser+"', '"+idUserFollowing+"')";
+		String insert = "INSERT INTO Followers(idUser, idFollowing) VALUES('"+idMyUser+"', '"+idUserFollowing+"');";
 
 		Statement lecture = connexion.createStatement();
 		int rs = lecture.executeUpdate(insert);
@@ -45,7 +45,7 @@ public class FriendTool {
 		int idMyUser = DBTool.getUserID(connexion, myUser);
 		int idUserFollowing = DBTool.getUserID(connexion, userFollow);
 		
-		String delete = "DELETE FROM Followers WHERE idUser="+idMyUser+" AND idFollowing="+idUserFollowing;
+		String delete = "DELETE FROM Followers WHERE idUser="+idMyUser+" AND idFollowing="+idUserFollowing+";";
 
 		Statement lecture = connexion.createStatement();
 		int rs = lecture.executeUpdate(delete);

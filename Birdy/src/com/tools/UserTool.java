@@ -7,7 +7,7 @@ import java.sql.Statement;
 public class UserTool {
 
 	public static boolean usernameExist(Connection connexion, String username) throws SQLException {
-		String query = "Select * From User u Where u.username='"+username+"'";
+		String query = "Select * From User u Where u.username='"+username+"';";
 
 		Statement lecture = connexion.createStatement();
 		ResultSet rs = lecture.executeQuery(query);
@@ -19,7 +19,7 @@ public class UserTool {
 	}
 
 	public static boolean emailExist(Connection connexion, String email) throws SQLException {
-		String query = "Select * From User u Where u.email='"+email+"'";
+		String query = "Select * From User u Where u.email='"+email+"';";
 
 		Statement lecture = connexion.createStatement();
 		ResultSet rs = lecture.executeQuery(query);
@@ -40,7 +40,7 @@ public class UserTool {
 	}
 
 	public static boolean checkPass(Connection connexion, String login, String pass) throws SQLException {
-		String query = "Select * From User u Where u.email='"+login+"' AND u.password='"+pass+"' ";
+		String query = "Select * From User u Where u.email='"+login+"' AND u.password='"+pass+"';";
 		//TODO ne znam preku koj login
 		Statement lecture = connexion.createStatement();
 		ResultSet rs = lecture.executeQuery(query);
@@ -89,7 +89,7 @@ public class UserTool {
 	public static boolean insertUser(Connection connexion, String username, String email, 
 			String password, String name, String surname) throws SQLException {
 		String insert = "INSERT INTO User(email, username, name, surname, password) "
-				+ "VALUES ('"+email+"', '"+username+"', '"+name+"', '"+surname+"','"+password+"');";
+				+ "VALUES('"+email+"', '"+username+"', '"+name+"', '"+surname+"','"+password+"');";
 
 		Statement lecture = connexion.createStatement();
 		int rs = lecture.executeUpdate(insert);

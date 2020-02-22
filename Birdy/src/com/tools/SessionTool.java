@@ -24,7 +24,7 @@ public class SessionTool {
 		String key = randomAlphaNumeric(32);
 
 		String insert = "INSERT INTO Session(idUser, sessionKey) "
-				+ "VALUES ("+userID+",'"+key+"')";
+				+ "VALUES("+userID+",'"+key+"');";
 
 		Statement lecture = connexion.createStatement();
 		int rs = lecture.executeUpdate(insert);
@@ -41,7 +41,7 @@ public class SessionTool {
 	public static boolean logoutUser(Connection connexion, String login) throws SQLException {
 		int userID = DBTool.getUserID(connexion, login);
 		
-		String delete = "DELETE FROM Session WHERE idUser="+userID;
+		String delete = "DELETE FROM Session WHERE idUser="+userID+";";
 
 		Statement lecture = connexion.createStatement();
 		int rs = lecture.executeUpdate(delete);

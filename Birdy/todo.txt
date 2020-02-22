@@ -4,5 +4,5 @@
 
 
 - implementer mongodb
-- ajouter des ; dans chaque query
+- ajouter des ; dans chaque query (c'est fait)
 - add json error code to every json error (they are all 0)
