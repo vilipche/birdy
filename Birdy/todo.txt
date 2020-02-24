@@ -1,8 +1,7 @@
 + authentification services
 + tester les services en local
 + on delete cascade, if we delete a user, we delete the session and friendship
++ ajouter des ; dans chaque query
++ implementer mongodb
 
-
-- implementer mongodb
-- ajouter des ; dans chaque query (c'est fait)
 - add json error code to every json error (they are all 0)

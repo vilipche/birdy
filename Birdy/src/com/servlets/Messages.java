@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.services.messages.*;
 
-
+import org.bson.types.ObjectId;
 import org.json.JSONObject;
 
 
@@ -19,11 +19,10 @@ import org.json.JSONObject;
 public class Messages extends HttpServlet {
 	
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String user = request.getParameter("user");
-		String message = request.getParameter("message");
+		String idmsg = request.getParameter("idMessage");
 
-
-		JSONObject json = MessageServices.removeMessage(user, message);
+		ObjectId oid = new ObjectId("idmsg");
+		JSONObject json = MessageServices.removeMessage(oid);
 				
 		PrintWriter out = response.getWriter();
 		out.println(json.toString());
