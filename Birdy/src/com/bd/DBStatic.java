@@ -14,7 +14,7 @@ public class DBStatic {
 	public static String mysql_user = "root";
 	public static String mysql_password = "root";
 	
-	public static String mongo_host = "localhost:27017";
+	public static String mongo_host = "mongodb://localhost:27017";
 	public static String mongo_db = "sotiroski-li";
 	
 }

@@ -60,7 +60,7 @@ public class Database {
 		}
 	}
 	public static MongoDatabase getMongoDBConnection()  {
-		MongoClient mongo = MongoClients.create(DBStatic.mongo_host);
+		MongoClient mongo = MongoClients.create();
 		return mongo.getDatabase(DBStatic.mongo_db);
 	}
 
