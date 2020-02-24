@@ -54,7 +54,6 @@ public class FriendServices {
 		finally {
 			try {
 				connexion.close();
-				//TODO dali e dobro vaka, dava problem so init
 			} catch (SQLException e) {
 				System.out.println("Failed to close the connection");
 				e.printStackTrace();

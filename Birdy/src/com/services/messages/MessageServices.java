@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
-import org.json.JSONException;
+
 import org.json.JSONObject;
 
 import com.bd.Database;
@@ -17,7 +17,7 @@ import com.tools.UserTool;
 
 public class MessageServices {
 
-	
+
 	public static JSONObject addMessage(String myUser, String message) {
 
 		Connection connexion = null;
@@ -27,12 +27,14 @@ public class MessageServices {
 			if(myUser == null || message== null) {
 				return ErrorJSON.serviceRefused("Mauvais arguments", -1);
 			}
-			
+
 			connexion = Database.getMySQLConnection();
 			db = Database.getMongoDBConnection();
 			MongoCollection<Document> messageColl = db.getCollection("message");
 
-			
+
+
+
 			boolean userCheck = UserTool.userExist(connexion, myUser);		
 
 			if(!userCheck) {
@@ -59,22 +61,39 @@ public class MessageServices {
 		} catch (SQLException e) {
 			return ErrorJSON.serviceRefused(null, 0);
 		}
+		finally {
+			try {
+				connexion.close();
+			} catch (SQLException e) {
+				System.out.println("Failed to close the connection");
+				e.printStackTrace();
+			}
+		}
 
 	}
-	
+
 	public static JSONObject listMessages(String user) {
 
+		Connection connexion = null;
+		MongoDatabase db = null;
+
 		try {
+
+			connexion = Database.getMySQLConnection();
+			db = Database.getMongoDBConnection();
+			MongoCollection<Document> messageColl = db.getCollection("message");
 
 			if(user == null) {
 				return ErrorJSON.serviceRefused("Mauvais arguments", -1);
 			}
 
-			boolean userCheck = UserTool.userExist(user);		
+			boolean userCheck = UserTool.userExist(connexion, user);		
 
-			return ErrorJSON.serviceRefused("User doesn't exist", 0);
+			if(!userCheck) {
+				return ErrorJSON.serviceRefused("User doesn't exist", 0);
+			}
 
-			boolean getOK = MessageTool.getListMessages(user);
+			boolean getOK = MessageTool.getListMessages(connexion, messageColl, user);
 
 			if(!getOK) {
 				return ErrorJSON.serviceRefused("Error while getting list of messages", 0);
@@ -83,58 +102,58 @@ public class MessageServices {
 			return ErrorJSON.serviceAccepted();
 
 		}
-		catch (JSONException e) {
+		catch (SQLException e) {
 			return ErrorJSON.serviceRefused(null, 0);
-		} catch (SQLException e) {
-			return ErrorJSON.serviceRefused(null, 0);
+		}
+		finally {
+			try {
+				connexion.close();
+			} catch (SQLException e) {
+				System.out.println("Failed to close the connection");
+				e.printStackTrace();
+			}
 		}
 
 	}
-	
+
 
 
 	public static JSONObject removeMessage(ObjectId id) {
-		
-		Connection connexion = null;
+
+
 		MongoDatabase db = null;
-		
-		try {
 
-			if(user == null || message == null) {
-				return ErrorJSON.serviceRefused("Mauvais arguments", -1);
-			}
-			
-			db = Database.getMongoDBConnection();
-			MongoCollection<Document> messageColl = db.getCollection("message");
-
-//			boolean userCheck = UserTool.userExist(connexion, user);		
-//
-//			if(!userCheck) {
-//				return ErrorJSON.serviceRefused("User doesn't exist", 0);
-//			}
-
-			boolean isInDB = MessageTool.findMessage(messageColl, id);
-
-			if(!isInDB) {
-				return ErrorJSON.serviceRefused("Message not in database", 0);
-			}
-
-			boolean removeOK = MessageTool.removeMessage(messageColl, id);
-
-			if(!removeOK) {
-				return ErrorJSON.serviceRefused("Error while removing message", 0);
-			}
-
-
-			return ErrorJSON.serviceAccepted();
-
-
-		} catch (JSONException e) {
-			return ErrorJSON.serviceRefused(null, 0);
-		} catch (SQLException e) {
-			return ErrorJSON.serviceRefused(null, 0);
+		if(id == null) {
+			return ErrorJSON.serviceRefused("Mauvais arguments", -1);
 		}
+
+		db = Database.getMongoDBConnection();
+		MongoCollection<Document> messageColl = db.getCollection("message");
+
+		//			boolean userCheck = UserTool.userExist(connexion, user);		
+		//
+		//			if(!userCheck) {
+		//				return ErrorJSON.serviceRefused("User doesn't exist", 0);
+		//			}
+
+		boolean isInDB = MessageTool.findMessage(messageColl, id);
+
+		if(!isInDB) {
+			return ErrorJSON.serviceRefused("Message not in database", 0);
+		}
+
+		boolean removeOK = MessageTool.removeMessage(messageColl, id);
+
+		if(!removeOK) {
+			return ErrorJSON.serviceRefused("Error while removing message", 0);
+		}
+
+
+		return ErrorJSON.serviceAccepted();
+
+
+
 	}
 
-	
+
 }

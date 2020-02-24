@@ -7,8 +7,10 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import org.bson.BSON;
 import org.bson.Document;
 import org.bson.types.ObjectId;
+import org.json.JSONObject;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
@@ -53,6 +55,7 @@ public class MessageTool {
 	}
 
 	public static boolean findMessage(MongoCollection<Document> messageColl, ObjectId id) {
+		
 		Document query = new Document();
 		query.append("_id", id);
 		MongoCursor<Document> cursor = messageColl.find(query).iterator();
@@ -65,6 +68,7 @@ public class MessageTool {
 	}
 
 	public static boolean removeMessage(MongoCollection<Document> messageColl, ObjectId id) {
+		
 		Document query = new Document();
 		query.append("_id", id);
 		DeleteResult dr =  messageColl.deleteOne(query);
@@ -72,14 +76,52 @@ public class MessageTool {
 		
 	}
 
-	public static boolean getListMessages(String user) {
-		boolean isOK;
-		//		isOK = databse function that gets the list of messages of a user
+	public static boolean getListMessages(Connection connexion, MongoCollection<Document> messageColl, String user) {
+		try {
+			int userID = UserTool.getUserID(connexion, user);
+			Document query = new Document();
+			query.append("id_autheur",userID);
+//			query.append("_id", true); //TODO comment implementer > db.messages.find( {"id":1} , {"_id":true} )
 
-		if(!isOK) {
+
+			
+			MongoCursor<Document> cursor = messageColl.find(query).iterator();
+
+			while(cursor.hasNext()) {
+				System.out.println(cursor.next().toJson());
+
+			}
+
+
+		} catch (SQLException e) {
+			e.printStackTrace();
 			return false;
 		}
+		
 		return true;
+		
 	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
