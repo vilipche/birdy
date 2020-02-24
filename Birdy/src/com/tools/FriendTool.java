@@ -10,8 +10,8 @@ public class FriendTool {
 	
 	public static boolean followExist(Connection connexion, String myUser, String userFollowing) throws SQLException {
 		// TODO checks if both arguments are friends in the database;
-		int idMyUser = DBTool.getUserID(connexion, myUser);
-		int idUserFollowing = DBTool.getUserID(connexion, userFollowing);
+		int idMyUser = UserTool.getUserID(connexion, myUser);
+		int idUserFollowing = UserTool.getUserID(connexion, userFollowing);
 		String query = "Select * From Followers Where idUser='"+idMyUser+"' AND idFollowing='"+idUserFollowing+"';";
 
 		Statement lecture = connexion.createStatement();
@@ -26,8 +26,8 @@ public class FriendTool {
 	public static boolean followUser(Connection connexion, String myUser, String userFollow) throws SQLException {
 
 
-		int idMyUser = DBTool.getUserID(connexion, myUser);
-		int idUserFollowing = DBTool.getUserID(connexion, userFollow);
+		int idMyUser = UserTool.getUserID(connexion, myUser);
+		int idUserFollowing = UserTool.getUserID(connexion, userFollow);
 		String insert = "INSERT INTO Followers(idUser, idFollowing) VALUES('"+idMyUser+"', '"+idUserFollowing+"');";
 
 		Statement lecture = connexion.createStatement();
@@ -42,8 +42,8 @@ public class FriendTool {
 
 
 	public static boolean unfollow(Connection connexion, String myUser, String userFollow) throws SQLException {
-		int idMyUser = DBTool.getUserID(connexion, myUser);
-		int idUserFollowing = DBTool.getUserID(connexion, userFollow);
+		int idMyUser = UserTool.getUserID(connexion, myUser);
+		int idUserFollowing = UserTool.getUserID(connexion, userFollow);
 		
 		String delete = "DELETE FROM Followers WHERE idUser="+idMyUser+" AND idFollowing="+idUserFollowing+";";
 
@@ -57,14 +57,14 @@ public class FriendTool {
 		return false;
 	}
 
-	public static boolean getListFriends(Connection connexion, String user) {
-		boolean isOK;
-//		isOK = databse function that gets list of all friends
-		
-		if(!isOK) {
-			return false;
-		}
-		return true;
-	}
+//	public static boolean getListFriends(Connection connexion, String user) {
+//		boolean isOK;
+////		isOK = databse function that gets list of all friends
+//		
+//		if(!isOK) {
+//			return false;
+//		}
+//		return true;
+//	}
 
 }

@@ -6,6 +6,20 @@ import java.sql.Statement;
 
 public class UserTool {
 
+	public static int getUserID(Connection connexion, String user) throws SQLException {
+		// TODO     
+		String query = "Select idUser From User Where username='"+user+"';";
+
+		Statement lecture = connexion.createStatement();
+		ResultSet rs = lecture.executeQuery(query);
+
+		int id = -1; 
+		while(rs.next()) {
+			 id = rs.getInt("idUser");
+		}
+		return id;
+	}
+	
 	public static boolean usernameExist(Connection connexion, String username) throws SQLException {
 		String query = "Select * From User u Where u.username='"+username+"';";
 
@@ -105,7 +119,7 @@ public class UserTool {
 
 	public static boolean deleteUser(Connection connexion, String user) throws SQLException {
 		
-		int idUser = DBTool.getUserID(connexion, user);
+		int idUser = getUserID(connexion, user);
 		String delete = "DELETE FROM User WHERE idUser="+idUser+";";
 
 		Statement lecture = connexion.createStatement();

@@ -19,7 +19,7 @@ public class SessionTool {
 	
 	public static boolean insertSession(Connection connexion, String login) throws SQLException {
 		
-		int userID = DBTool.getUserID(connexion, login);
+		int userID = UserTool.getUserID(connexion, login);
 		
 		String key = randomAlphaNumeric(32);
 
@@ -39,7 +39,7 @@ public class SessionTool {
 	}
 
 	public static boolean logoutUser(Connection connexion, String login) throws SQLException {
-		int userID = DBTool.getUserID(connexion, login);
+		int userID = UserTool.getUserID(connexion, login);
 		
 		String delete = "DELETE FROM Session WHERE idUser="+userID+";";
 
