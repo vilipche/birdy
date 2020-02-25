@@ -52,4 +52,16 @@ public class ErrorJSON {
 		return json;
 				
 	}
+	
+	public static JSONObject serviceAccepted(String key, JSONObject paramJson)  {
+		JSONObject json = new JSONObject();
+		try {
+			json.put("status", "OK");
+			json.put(key, paramJson);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return json;
+				
+	}
 }

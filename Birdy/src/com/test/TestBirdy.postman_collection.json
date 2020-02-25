@@ -1,0 +1,255 @@
+{
+	"info": {
+		"_postman_id": "f426510a-2f22-4e80-8e1f-f4c3d2ebd35b",
+		"name": "Birdy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create friends",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "?myUser&userFriend",
+					"query": [
+						{
+							"key": "myUser",
+							"value": ""
+						},
+						{
+							"key": "userFriend",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get user following",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete user unfollow",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "?myUser&userFriend",
+					"query": [
+						{
+							"key": "myUser",
+							"value": ""
+						},
+						{
+							"key": "userFriend",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "insert message",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Birdy/messages?myUser=a&message=sdsadasdsadasa",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Birdy",
+						"messages"
+					],
+					"query": [
+						{
+							"key": "myUser",
+							"value": "a"
+						},
+						{
+							"key": "message",
+							"value": "sdsadasdsadasa"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get messages",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Birdy/messages?user=a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Birdy",
+						"messages"
+					],
+					"query": [
+						{
+							"key": "user",
+							"value": "a"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteMessage",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post authentification",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Birdy/authentification?email=a&password=Aaaaaaaa123",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Birdy",
+						"authentification"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "a"
+						},
+						{
+							"key": "password",
+							"value": "Aaaaaaaa123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete authentification",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Birdy/authentification?email=a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Birdy",
+						"authentification"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "a"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete user",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Birdy/user?username=tata&email=tata@gmail.com&password=123ABCabc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Birdy",
+						"user"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "tata"
+						},
+						{
+							"key": "email",
+							"value": "tata@gmail.com"
+						},
+						{
+							"key": "password",
+							"value": "123ABCabc"
+						},
+						{
+							"key": "name",
+							"value": "Tata",
+							"disabled": true
+						},
+						{
+							"key": "surname",
+							"value": "Titi",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "?username=sadasd&email=dasdsad&password=sda223AWdwa",
+					"query": [
+						{
+							"key": "username",
+							"value": "sadasd"
+						},
+						{
+							"key": "email",
+							"value": "dasdsad"
+						},
+						{
+							"key": "password",
+							"value": "sda223AWdwa"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

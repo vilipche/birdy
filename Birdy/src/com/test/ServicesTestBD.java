@@ -33,9 +33,12 @@ public class ServicesTestBD {
 			//FriendServices -> Works
 //			System.out.println(FriendServices.follow("a", "toto"));
 //			System.out.println(FriendServices.unFollow("a", "toto"));
-			
+//			System.out.println(FriendServices.listFriends("a"));
 			//On delete cascade -> Works
 //			System.out.println(UserServices.removeUser("a", "a", "Aaaaaaaa123"));
+//			toto@gmail.com
+			
+			System.out.println(SessionServices.login("toto", "123ABCabc"));
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -143,7 +146,7 @@ public class ServicesTestBD {
 	public static void insertLine() {
 
 		try {
-			DBStatic.pooling = true;
+//			DBStatic.pooling = true;
 			Connection c = Database.getMySQLConnection();
 			Statement statement = c.createStatement();
 			System.out.println("Statement creation");

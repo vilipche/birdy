@@ -41,7 +41,7 @@ public class SessionTool {
 	public static boolean logoutUser(Connection connexion, String login) throws SQLException {
 		int userID = UserTool.getUserID(connexion, login);
 		
-		String delete = "DELETE FROM Session WHERE idUser="+userID+";";
+		String delete = "DELETE FROM Session WHERE  idUser="+userID+";";
 
 		Statement lecture = connexion.createStatement();
 		int rs = lecture.executeUpdate(delete);

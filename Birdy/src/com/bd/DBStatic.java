@@ -8,7 +8,7 @@ public class DBStatic {
 //	public static String mysql_user = "root";
 //	public static String mysql_password = "root";
 	
-	public static boolean pooling = false;
+	public static boolean pooling = true;
 	public static String mysql_host = "localhost";
 	public static String mysql_db = "sotiroski-li";
 	public static String mysql_user = "root";

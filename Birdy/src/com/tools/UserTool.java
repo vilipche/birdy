@@ -20,12 +20,26 @@ public class UserTool {
 		return id;
 	}
 	
-	public static boolean usernameExist(Connection connexion, String username) throws SQLException {
-		String query = "Select * From User u Where u.username='"+username+"';";
+	public static String getUserFromID(Connection connexion, int idUser) throws SQLException {
+		// TODO     
+		String query = "Select username From User Where idUser='"+idUser+"';";
 
 		Statement lecture = connexion.createStatement();
 		ResultSet rs = lecture.executeQuery(query);
 
+		String username = null;
+		while(rs.next()) {
+			 username = rs.getString("username");
+		}
+		return username;
+	}
+	
+	public static boolean usernameExist(Connection connexion, String username) throws SQLException {
+		String query = "Select * From User u Where u.username='"+username+"';";
+		
+		Statement lecture = connexion.createStatement();
+		ResultSet rs = lecture.executeQuery(query);
+		System.out.println("user");
 		while(rs.next()) {
 			return true;
 		}
@@ -37,7 +51,7 @@ public class UserTool {
 
 		Statement lecture = connexion.createStatement();
 		ResultSet rs = lecture.executeQuery(query);
-
+		System.out.println("email");
 		while(rs.next()) {
 			return true;
 		}
@@ -49,13 +63,14 @@ public class UserTool {
 	public static boolean userExist(Connection connexion, String login) throws SQLException {
 		boolean email = emailExist(connexion, login);
 		boolean user = usernameExist(connexion, login);
-		
+		System.out.println(email);
+		System.out.println(user);
 		return email || user;
 	}
 
 	public static boolean checkPass(Connection connexion, String login, String pass) throws SQLException {
-		String query = "Select * From User u Where u.email='"+login+"' AND u.password='"+pass+"';";
-		//TODO ne znam preku koj login
+		String query = "Select * From User u Where u.email='"+login+"' OR u.username='"+login+"' AND u.password='"+pass+"';";
+
 		Statement lecture = connexion.createStatement();
 		ResultSet rs = lecture.executeQuery(query);
 

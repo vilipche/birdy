@@ -28,30 +28,35 @@ public class SessionServices {
 			boolean is_user = UserTool.userExist(connexion, login);
 
 			if(!is_user) {
-				return ErrorJSON.serviceRefused("No user in the db", 0);
+				return ErrorJSON.serviceRefused("No user in the db", 10000);
 			}
 
 			boolean pass_ok = UserTool.checkPass(connexion, login, pass);
 
 			if(!pass_ok) {
-				return ErrorJSON.serviceRefused("Error password", 0);
+				return ErrorJSON.serviceRefused("Error password", 10000);
 			}
-
-			SessionTool.insertSession(connexion, login);
-
+			
+			try {
+				SessionTool.insertSession(connexion, login);
+			} catch (SQLException e) {
+				return ErrorJSON.serviceRefused("Deja connecte", 100);
+			}
+			
 			return ErrorJSON.serviceAccepted();
 
 		}
 		catch (SQLException e) {
-			return ErrorJSON.serviceRefused(null, 0);
+			e.printStackTrace();
+			return ErrorJSON.serviceRefused("user exist problem", 100);
 		}
 		finally {
 			try {
 				connexion.close();
 				//TODO dali e dobro vaka, dava problem so init
 			} catch (SQLException e) {
-				System.out.println("Failed to close the connection");
 				e.printStackTrace();
+				return ErrorJSON.serviceRefused("Failed to close the connection", 100);
 			}
 		}
 	}
@@ -70,7 +75,7 @@ public class SessionServices {
 			boolean is_user = UserTool.userExist(connexion, login);
 
 			if(!is_user) {
-				return ErrorJSON.serviceRefused("No user in the db", 0);
+				return ErrorJSON.serviceRefused("No user in the db", 1000);
 			}
 
 
@@ -93,7 +98,7 @@ public class SessionServices {
 				//TODO dali e dobro vaka, dava problem so init
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return ErrorJSON.serviceRefused("Failed to close the connection", 0);
+				return ErrorJSON.serviceRefused("Failed to close the connection", 100);
 			}
 		}
 

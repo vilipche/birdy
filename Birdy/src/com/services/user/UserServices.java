@@ -68,8 +68,8 @@ public class UserServices {
 				connexion.close();
 				//TODO dali e dobro vaka, dava problem so init
 			} catch (SQLException e) {
-				System.out.println("Failed to close the connection");
 				e.printStackTrace();
+				return ErrorJSON.serviceRefused("Failed to close the connection", 100);
 			}
 		}
 
@@ -90,23 +90,23 @@ public class UserServices {
 
 			boolean is_username = UserTool.usernameExist(connexion, username);
 			if(!is_username) {
-				return ErrorJSON.serviceRefused("User doesn't exist", 0);
+				return ErrorJSON.serviceRefused("User doesn't exist", 10000);
 			}
 
 			boolean is_email = UserTool.emailExist(connexion, email);
 			if(!is_email) {
-				return ErrorJSON.serviceRefused("Email doesn't exist", 0);
+				return ErrorJSON.serviceRefused("Email doesn't exist", 10000);
 			}
 
 			boolean is_password = UserTool.checkPasswordExist(connexion, username, password);
 			if(!is_password) {
-				return ErrorJSON.serviceRefused("Wrong password", 0);
+				return ErrorJSON.serviceRefused("Wrong password", 10000);
 			}
 
 			boolean is_removed = UserTool.deleteUser(connexion, username);
 			
 			if(!is_removed) {
-				return ErrorJSON.serviceRefused("Couldn't remove user", 0);
+				return ErrorJSON.serviceRefused("Couldn't remove user", 10000);
 			}
 			
 			return ErrorJSON.serviceAccepted();
@@ -114,14 +114,14 @@ public class UserServices {
 
 		catch (SQLException e) {
 			e.printStackTrace();
-			return ErrorJSON.serviceRefused(null, 0);
+			return ErrorJSON.serviceRefused("Erreur sql", 1000);
 		}
 		finally {
 			try {
 				connexion.close();
 			} catch (SQLException e) {
-				System.out.println("Failed to close the connection");
 				e.printStackTrace();
+				return ErrorJSON.serviceRefused("Failed to close the connection", 100);
 			}
 		}
 

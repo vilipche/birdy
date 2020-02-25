@@ -14,20 +14,17 @@
     <servlet-class>com.servlets.Friends</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>Athentification</servlet-name>
-    <servlet-class>com.servlets.Athentification</servlet-class>
+    <servlet-name>Authentification</servlet-name>
+    <servlet-class>com.servlets.Authentification</servlet-class>
   </servlet>
   
   <servlet>
-    <servlet-name>TestDB</servlet-name>
-    <servlet-class>com.servlets.TestDB</servlet-class>
+    <servlet-name>ServletTestDB</servlet-name>
+    <servlet-class>com.test.ServletTestDB</servlet-class>
   </servlet>
   
   
-  <servlet-mapping>
-    <servlet-name>TestDB</servlet-name>
-    <url-pattern>/test</url-pattern>
-  </servlet-mapping>
+
   <servlet-mapping>
     <servlet-name>User</servlet-name>
     <url-pattern>/user</url-pattern>
@@ -41,8 +38,12 @@
     <url-pattern>/friends</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>Athentification</servlet-name>
-    <url-pattern>/athentification</url-pattern>
+    <servlet-name>Authentification</servlet-name>
+    <url-pattern>/authentification</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>ServletTestDB</servlet-name>
+    <url-pattern>/test</url-pattern>
   </servlet-mapping>
   
   <resource-ref>

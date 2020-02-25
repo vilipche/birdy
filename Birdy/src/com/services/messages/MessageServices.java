@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
-
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.bd.Database;
@@ -29,28 +29,28 @@ public class MessageServices {
 			}
 
 			connexion = Database.getMySQLConnection();
+
 			db = Database.getMongoDBConnection();
 			MongoCollection<Document> messageColl = db.getCollection("message");
-
 
 
 
 			boolean userCheck = UserTool.userExist(connexion, myUser);		
 
 			if(!userCheck) {
-				return ErrorJSON.serviceRefused("User doesn't exist", 0);
+				return ErrorJSON.serviceRefused("User doesn't exist", 10000);
 			}
 
 			boolean messageCheck = MessageTool.validMessage(message);
 
 			if(!messageCheck) {
-				return ErrorJSON.serviceRefused("Message format not valid (too long)", 0);
+				return ErrorJSON.serviceRefused("Message format not valid (too long)", 10000);
 			}
 
 			boolean addOK = MessageTool.addMessage(connexion, messageColl, myUser, message);
 
 			if(!addOK) {
-				return ErrorJSON.serviceRefused("Error while adding message", 0);
+				return ErrorJSON.serviceRefused("Error while adding message", 10000);
 			}
 
 
@@ -59,7 +59,7 @@ public class MessageServices {
 
 
 		} catch (SQLException e) {
-			return ErrorJSON.serviceRefused(null, 0);
+			return ErrorJSON.serviceRefused("Erreur en userExist", 1000);
 		}
 		finally {
 			try {
@@ -67,6 +67,8 @@ public class MessageServices {
 			} catch (SQLException e) {
 				System.out.println("Failed to close the connection");
 				e.printStackTrace();
+				return ErrorJSON.serviceRefused("Erreur en close ", 1000);
+
 			}
 		}
 
@@ -90,20 +92,24 @@ public class MessageServices {
 			boolean userCheck = UserTool.userExist(connexion, user);		
 
 			if(!userCheck) {
-				return ErrorJSON.serviceRefused("User doesn't exist", 0);
+				return ErrorJSON.serviceRefused("User doesn't exist", 10000);
 			}
 
-			boolean getOK = MessageTool.getListMessages(connexion, messageColl, user);
+			JSONObject jsonListMessages = MessageTool.getListMessages(connexion, messageColl, user);
 
-			if(!getOK) {
-				return ErrorJSON.serviceRefused("Error while getting list of messages", 0);
+			if(jsonListMessages == null) {
+				return ErrorJSON.serviceRefused("Error while getting list of messages", 10000);
 			}
 
-			return ErrorJSON.serviceAccepted();
+			return ErrorJSON.serviceAccepted("listMessages", jsonListMessages);
 
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return ErrorJSON.serviceRefused("Probleme dans getListMessage", 100); 
 		}
 		catch (SQLException e) {
-			return ErrorJSON.serviceRefused(null, 0);
+			e.printStackTrace();
+			return ErrorJSON.serviceRefused("Erreur dans userExist", 1000);
 		}
 		finally {
 			try {
@@ -139,13 +145,13 @@ public class MessageServices {
 		boolean isInDB = MessageTool.findMessage(messageColl, id);
 
 		if(!isInDB) {
-			return ErrorJSON.serviceRefused("Message not in database", 0);
+			return ErrorJSON.serviceRefused("Message not in database", 10000);
 		}
 
 		boolean removeOK = MessageTool.removeMessage(messageColl, id);
 
 		if(!removeOK) {
-			return ErrorJSON.serviceRefused("Error while removing message", 0);
+			return ErrorJSON.serviceRefused("Error while removing message", 10000);
 		}
 
 

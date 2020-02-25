@@ -28,19 +28,19 @@ public class FriendServices {
 			boolean userCheck = UserTool.userExist(connexion, userFriend);		
 
 			if(!userCheck) {
-				return ErrorJSON.serviceRefused("User doesn't exist", 0);
+				return ErrorJSON.serviceRefused("User doesn't exist", 10000);
 			}
 
 			boolean followCheck = FriendTool.followExist(connexion, myUser, userFriend);
 
 			if(!followCheck) {
-				return ErrorJSON.serviceRefused("You are not following this person", 0);
+				return ErrorJSON.serviceRefused("You are not following this person", 10000);
 			}
 
 			boolean removeOK = FriendTool.unfollow(connexion, myUser, userFriend);
 
 			if(!removeOK) {
-				return ErrorJSON.serviceRefused("Error while unfollowing friend", 0);
+				return ErrorJSON.serviceRefused("Error while unfollowing friend", 10000);
 			}
 
 
@@ -49,7 +49,7 @@ public class FriendServices {
 
 
 		catch (SQLException e) {
-			return ErrorJSON.serviceRefused(null, 0);
+			return ErrorJSON.serviceRefused("Erreur dans userExist ou followExist", 1000);
 		}
 		finally {
 			try {
@@ -76,19 +76,19 @@ public class FriendServices {
 			boolean userCheck = UserTool.userExist(connexion, userFriend);		
 			
 			if(!userCheck) {
-				return ErrorJSON.serviceRefused("User doesn't exist", 0);
+				return ErrorJSON.serviceRefused("User doesn't exist", 10000);
 			}
 			
 			boolean friendCheck = FriendTool.followExist(connexion, myUser, userFriend);
 			
 			if(friendCheck) {
-				return ErrorJSON.serviceRefused("You are already following the person", 0);
+				return ErrorJSON.serviceRefused("You are already following the person", 10000);
 			}
 			
 			boolean addOK = FriendTool.followUser(connexion, myUser, userFriend);
 	
 			if(!addOK) {
-				return ErrorJSON.serviceRefused("Error while adding friend", 0);
+				return ErrorJSON.serviceRefused("Error while adding friend", 10000);
 			}
 			
 			
@@ -96,7 +96,7 @@ public class FriendServices {
 			
 		}
 		catch (SQLException e) {
-			return ErrorJSON.serviceRefused(null, 0);
+			return ErrorJSON.serviceRefused("Erreur avec userExist ou followExist", 1000);
 		}
 		finally {
 			try {
@@ -125,22 +125,25 @@ public class FriendServices {
 			boolean userCheck = UserTool.userExist(connexion, user);		
 
 			if(!userCheck) {
-				return ErrorJSON.serviceRefused("User doesn't exist", 0);	
+				return ErrorJSON.serviceRefused("User doesn't exist", 10000);	
 			}
 			
 			//TODO 
-			boolean getOK = FriendTool.getListFriends(connexion, user);
+			JSONObject jsonListFriends = FriendTool.getListFriends(connexion, user);
 
-			if(!getOK) {
-				return ErrorJSON.serviceRefused("Error while getting list of friends", 0);
+			if(jsonListFriends == null) {
+				return ErrorJSON.serviceRefused("Error while getting list of friends", 100);
 			}
 
-			return ErrorJSON.serviceAccepted();
+			return ErrorJSON.serviceAccepted("friends", jsonListFriends);
 
 		}
 
 		catch (SQLException e) {
-			return ErrorJSON.serviceRefused(null, 0);
+			return ErrorJSON.serviceRefused("Erreur sur le test UserExist", 1000);
+		} catch (JSONException e) {
+			return ErrorJSON.serviceRefused("Json Error", 100);
+
 		}
 		finally {
 			try {

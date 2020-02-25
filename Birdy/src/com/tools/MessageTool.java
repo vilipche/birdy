@@ -10,6 +10,7 @@ import java.util.List;
 import org.bson.BSON;
 import org.bson.Document;
 import org.bson.types.ObjectId;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.mongodb.client.MongoCollection;
@@ -76,29 +77,32 @@ public class MessageTool {
 		
 	}
 
-	public static boolean getListMessages(Connection connexion, MongoCollection<Document> messageColl, String user) {
+	public static JSONObject getListMessages(Connection connexion, MongoCollection<Document> messageColl, String user) throws JSONException {
+		JSONObject json = null;
 		try {
 			int userID = UserTool.getUserID(connexion, user);
 			Document query = new Document();
 			query.append("id_autheur",userID);
-//			query.append("_id", true); //TODO comment implementer > db.messages.find( {"id":1} , {"_id":true} )
 
-
-			
 			MongoCursor<Document> cursor = messageColl.find(query).iterator();
-
+			json = new JSONObject();
+			
 			while(cursor.hasNext()) {
-				System.out.println(cursor.next().toJson());
-
+				Document d = cursor.next();
+//				System.out.println(d.get("_id"));
+//				System.out.println(d.get("message"));
+				json.put(d.get("_id").toString(), d.get("message"));
 			}
-
-
+			
 		} catch (SQLException e) {
+
 			e.printStackTrace();
-			return false;
+
+		} finally {
+			return json;
 		}
 		
-		return true;
+
 		
 	}
 	

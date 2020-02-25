@@ -21,7 +21,7 @@ public class Messages extends HttpServlet {
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String idmsg = request.getParameter("idMessage");
 
-		ObjectId oid = new ObjectId("idmsg");
+		ObjectId oid = new ObjectId(idmsg);
 		JSONObject json = MessageServices.removeMessage(oid);
 				
 		PrintWriter out = response.getWriter();

@@ -20,13 +20,14 @@ public class TestMongo {
 		MongoDatabase db = Database.getMongoDBConnection();
 		MongoCollection<Document> coll = db.getCollection("message");
 		MongoCursor<Document> cursor = coll.find().iterator();
-		
-		System.out.println(MessageServices.listMessages("toto"));
-		
-		while(cursor.hasNext()) {
-			Document o = cursor.next();
-			System.out.println(o.toJson());
-		}
+
+//		System.out.println(MessageServices.removeMessage(new ObjectId("5e550ea8b1698b0b3ae64d95")));
+
+
+//		while(cursor.hasNext()) {
+//			Document o = cursor.next();
+//			System.out.println(o.toJson());
+//		}
 
 	}
 }

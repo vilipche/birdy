@@ -40,7 +40,7 @@ CREATE TABLE `Followers` (
 
 CREATE TABLE `Session` (
   `idUser` int(11) NOT NULL,
-  `key` varchar(32) NOT NULL,
+  `sessionKey` varchar(32) NOT NULL,
   `dateLogin` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -84,7 +84,7 @@ ALTER TABLE `Followers`
 --
 ALTER TABLE `Session`
   ADD PRIMARY KEY (`idUser`),
-  ADD UNIQUE KEY `key` (`key`),
+  ADD UNIQUE KEY `key` (`sessionKey`),
   ADD KEY `idUser` (`idUser`);
 
 --

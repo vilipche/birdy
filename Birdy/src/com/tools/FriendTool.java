@@ -4,6 +4,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class FriendTool {
 
 
@@ -57,14 +60,21 @@ public class FriendTool {
 		return false;
 	}
 
-//	public static boolean getListFriends(Connection connexion, String user) {
-//		boolean isOK;
-////		isOK = databse function that gets list of all friends
-//		
-//		if(!isOK) {
-//			return false;
-//		}
-//		return true;
-//	}
+	public static JSONObject getListFriends(Connection connexion, String user) throws SQLException, JSONException {
+		int idMyUser = UserTool.getUserID(connexion, user);
+
+		String query = "Select idFollowing From Followers Where idUser='"+idMyUser+"';";
+
+		Statement lecture = connexion.createStatement();
+		ResultSet rs = lecture.executeQuery(query);
+		JSONObject json = new JSONObject();
+		System.out.println(json == null);
+		while(rs.next()) {
+			int id = rs.getInt("idFollowing");
+			String username = UserTool.getUserFromID(connexion, id);
+			json.put(username, id);
+		}
+		return json;
+	}
 
 }
