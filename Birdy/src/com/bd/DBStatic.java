@@ -2,19 +2,24 @@ package com.bd;
 
 public class DBStatic {
 	
-//	public static boolean pooling = false;
-//	public static String mysql_host = "localhost";
-//	public static String mysql_db = "sotiroski";
-//	public static String mysql_user = "root";
-//	public static String mysql_password = "root";
+	//false segde raboti 
+	public static boolean pooling = false; //false local, true tomcat // vo databse bez host_tomcat i false
 	
-	public static boolean pooling = true;
-	public static String mysql_host = "localhost";
-	public static String mysql_db = "sotiroski-li";
-	public static String mysql_user = "root";
-	public static String mysql_password = "root";
+	// MySQL
+	public static final String mysql_host = "localhost";
+	public static final String mysql_db = "sotiroski-li";
+	public static final String mysql_user = "root";
+	public static final String mysql_password = "root";
+	public static final String mysql_host_tomcat = "db:3306";
+
+
 	
-	public static String mongo_host = "mongodb://localhost:27017";
-	public static String mongo_db = "sotiroski-li";
+	//od nejze
+	//MongoDB
+	public static final String mongo_host = "mongodb://localhost:27017";
+	public static final String mongo_db = "sotiroski-li";
+	public static final String mongo_host_tomcat = "mongo"; // preku war
+	public static final String mongo_host_eclipse = "localhost"; // ako lansiram od eclipse, ama ne lansiram
+	public static final int mongo_port = 27017;
 	
 }

@@ -21,10 +21,9 @@ public class ServletTestDB extends HttpServlet {
 	
 	
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		UserServices.newUser("qwerty", "werwer", "asda231SAD", "qwerty", "qwerty");
-//		com.test.ServicesTestBD.insertLine();			
+		UserServices.newUser("b", "b", "asdas231SAD", "qwerty", "qwerty");
 		
 	}
 

@@ -34,11 +34,12 @@ public class ServicesTestBD {
 //			System.out.println(FriendServices.follow("a", "toto"));
 //			System.out.println(FriendServices.unFollow("a", "toto"));
 //			System.out.println(FriendServices.listFriends("a"));
+			
 			//On delete cascade -> Works
 //			System.out.println(UserServices.removeUser("a", "a", "Aaaaaaaa123"));
 //			toto@gmail.com
 			
-			System.out.println(SessionServices.login("toto", "123ABCabc"));
+//			System.out.println(SessionServices.login("toto", "123ABCabc"));
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

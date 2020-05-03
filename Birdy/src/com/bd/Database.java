@@ -41,7 +41,7 @@ public class Database {
 				e.printStackTrace();
 			}
 			// on créer donc une nouvelle connexion
-			return DriverManager.getConnection("jdbc:mysql://"+DBStatic.mysql_host+"/"+DBStatic.mysql_db, DBStatic.mysql_user, DBStatic.mysql_password);
+			return DriverManager.getConnection("jdbc:mysql://"+DBStatic.mysql_host_tomcat +"/"+DBStatic.mysql_db, DBStatic.mysql_user, DBStatic.mysql_password);
 			/* on notera toutefois que le port est nécéssaire si la bd n'est pas interfacer au port par défaut.
 			 *  Ainsi jdbc:mysql://"+DBStatic.mysql_host+":"+DBStatic.mysql_port+"/"+DBStatic.mysql_bd
 			 */
@@ -60,7 +60,7 @@ public class Database {
 		}
 	}
 	public static MongoDatabase getMongoDBConnection()  {
-		MongoClient mongo = MongoClients.create();
+		MongoClient mongo = MongoClients.create("mongodb://root:root@" + DBStatic.mongo_host_tomcat + ":" +DBStatic.mongo_port);
 		return mongo.getDatabase(DBStatic.mongo_db);
 	}
 
