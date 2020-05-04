@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Birdy Home</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="main.css" type="text/css">
+    </head>
+    <body>
+        <div id="top"> 
+            <div id="logo">
+                Social <p>Comments</p>
+            </div>
+            <div id="search">
+                <form name="search_form" id="search_form" action="javascript:(function(){return;})()">
+                    <input type="text" name="requete" id="requete"/>
+                    <input type="submit" value="Search" id="search_button">
+                </form>
+            </div>
+
+            <div id="connect">
+                <span id="link">Joe</span>
+                <img src="Images/logout.png" title="disconnect" alt="disconnect" height="20px" id="disconnect">                
+            </div>
+        </div>
+        <div id="left"></div>
+        <div id="main">
+            <div id="new_message">
+                <form name="new_message_form" id="new_message_form" action="javascript:func_new_message()">
+                    <textarea name="text_new_message" rows=2 COLS=40></textarea>
+                    <input type="submit" value="Add message" id="new_button"/>
+                </form>
+            </div>
+            <div id="messages">
+                <div class="message">
+                    <div class="text_message">
+                        Bla bla bla
+                    </div>
+                </div>
+                <div class="infos_message">
+                    <span>Posted:
+                        <span class="link">Joe</span>
+                        the 15/10/2020
+                    </span>
+                    <img src="images/images_plus2.jpg" title="Publish message" alt="Publish message"/>
+                </div>
+            </div>
+
+            <div id="messages">
+                <div class="message">
+                    <div class="text_message">
+                        Bla 
+                            bla 
+                                bla
+                    </div>
+                </div>
+                <div class="infos_message">
+                    <span>Posted:
+                        <span class="link">Joe</span>
+                        the 15/10/2018
+                    </span>
+                    <img src="images/images_moins2.jpg" title="Cacher les messages" alt="Cacher les messages"/>
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="text_comment">
+                    BZZZZZZZZZZZZZZZZZZZZZZ
+                </div>
+                <div class="infos_comment">
+                    <span>Posed by <span class="link">John</span> the 02/01/2016 </span>
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="text_comment">
+                    xxxxxxxxxx
+                </div>
+                <div class="infos_comment">
+                    <span>Posed by <span class="link">Bill</span> the 02/01/2016 </span>
+                </div>
+            </div>
+
+            <div id="new_comment">
+                <form name="new_comment_form" id="new_comment_form" action="javascript:func_new_comment()">
+                    <textarea name="text_new_comment" rows=2 cols="40"></textarea>
+                    <input type="submit" value="Publish" id="new_button"> 
+                </form>
+            </div>
+            
+
+        </div>
+
+    </body>
+</html>

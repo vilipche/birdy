@@ -1,0 +1,98 @@
+#top {
+    height: 50px;
+    color: blue;
+    width: 100%;
+    background-color: palegoldenrod;
+}
+
+#left {
+    display:inline-block;
+    width: 20%;
+    height: 100px;
+    vertical-align: top;
+    background-color: palegreen;
+}
+
+#main {
+    display: inline-block;
+    width: 70%;
+    vertical-align: top;
+    background-color: papayawhip;
+}
+
+#new_message {
+    margin-top: 30px;
+    width: 90%;
+    background-color: orchid;
+}
+
+#messages {
+    margin-top: 30px; 
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 90%;
+    background-color: cadetblue;
+}
+
+#logo {
+    position: absolute;
+    top:10px;
+    left:20px;
+    width: 200px;
+    font-size: 30px;
+    text-shadow: 2px 2px 4px black;
+}
+
+#connect {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+}
+
+#search {
+    margin-left: 30%;
+    margin-top: 30px;
+}
+/*connect button*/
+#connect {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+}
+
+#disconnect {
+    cursor: pointer;
+}
+
+#ling {
+    color:blue;
+    cursor:pointer;
+    text-decoration: underline;
+}
+
+/*search*/
+
+#search {
+    margin-left: 30%;
+    margin-top: 30px;
+}
+
+#search #requete {
+    width:300px;
+}
+
+/*messages*/
+
+#new_message textarea {
+    width: 80%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#new_message input {
+    vertical-align: middle;
+    margin-left: 20px;
+    display: inline-block;
+}

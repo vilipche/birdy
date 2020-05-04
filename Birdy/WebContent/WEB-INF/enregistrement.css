@@ -1,0 +1,63 @@
+body {
+	background-color: rgb(219, 248, 248);
+}
+#enregistrement_main h1 {
+	color: rgb(115, 33, 131);
+	text-align: center;
+	margin-bottom: 30px;
+	text-shadow: 1px 1px 0px goldenrod;
+}
+
+#enregistrement_main {
+    width: 420px;
+    margin-left: 30%;
+}
+
+#enregistrement_main form {
+    border:solid;
+    box-shadow: 2px 2px 5px black;
+    padding: 10px 10px 10px 10px;
+}
+
+#enregistrement_main span {
+    margin-right: 20px;
+}
+
+#enregistrement_main .pn {
+    display: inline-block;
+    margin-left: 20px;
+    text-align: center;
+}
+
+#enregistrement_main .pn > span {
+    display: block;
+}
+
+#enregistrement_main .pn > input[type="text"] {
+    width: 150px;
+    margin-top: 10px;
+}
+
+#enregistrement_main .ids {
+    margin-top:  20px;
+    position: relative;
+    margin-left: 20px;
+
+}
+
+
+#enregistrement_main .ids > input {
+    position: absolute;
+    right: 30px;
+    width: 60%;
+}
+
+#enregistrement_main .buttons {
+    margin-top: 40px;
+    margin-left: 60px;
+    margin-bottom: 20px;
+}
+
+#enregistrement_main input[value="Cancel"]{
+    margin-left: 100px;
+}
