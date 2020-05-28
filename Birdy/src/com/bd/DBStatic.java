@@ -6,11 +6,11 @@ public class DBStatic {
 	public static boolean pooling = false; //false local, true tomcat // vo databse bez host_tomcat i false
 	
 	// MySQL
-	public static final String mysql_host = "localhost";
+	public static final String mysql_host = "localhost"; //changer si en local
 	public static final String mysql_db = "sotiroski-li";
 	public static final String mysql_user = "root";
 	public static final String mysql_password = "root";
-	public static final String mysql_host_tomcat = "db:3306";
+	public static final String mysql_host_tomcat = "db:3306"; //changer si sur tomcat/postman
 
 
 	

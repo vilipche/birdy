@@ -13,7 +13,10 @@ import com.tools.UserTool;
 public class SessionServices {
 
 
-
+	/**
+	 * Service used to create a session on log in
+	 * Either a username or email and password are required
+	 */
 	public static JSONObject login(String login, String pass)  {
 		if(login == null || pass == null) {
 			return ErrorJSON.serviceRefused("Mauvais arguments", -1);
@@ -53,7 +56,6 @@ public class SessionServices {
 		finally {
 			try {
 				connexion.close();
-				//TODO dali e dobro vaka, dava problem so init
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return ErrorJSON.serviceRefused("Failed to close the connection", 100);
@@ -61,6 +63,10 @@ public class SessionServices {
 		}
 	}
 
+	/**
+	 * Service used for a simple logout by clicking a button
+	 * As argument, the username or email are needed
+	 */
 	public static JSONObject logout(String login)  {
 		if(login == null) {
 			return ErrorJSON.serviceRefused("Mauvais arguments", -1);
@@ -95,7 +101,6 @@ public class SessionServices {
 		finally {
 			try {
 				connexion.close();
-				//TODO dali e dobro vaka, dava problem so init
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return ErrorJSON.serviceRefused("Failed to close the connection", 100);

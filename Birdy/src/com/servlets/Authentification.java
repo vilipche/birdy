@@ -19,7 +19,7 @@ public class Authentification extends HttpServlet {
 
 	@Override
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String login = request.getParameter("login");
+		String login = request.getParameter("login"); //loign -> soit username soit email
 
 
 		JSONObject json = SessionServices.logout(login);

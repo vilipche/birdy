@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import com.bd.Database;
 import com.tools.ErrorJSON;
 import com.tools.FriendTool;
+import com.tools.SessionTool;
 import com.tools.UserTool;
 
 public class FriendServices {
@@ -66,12 +67,22 @@ public class FriendServices {
 		
 		Connection connexion = null;
 		try {
+			
 
 			if(userFriend == null || myUser == null) {
 				return ErrorJSON.serviceRefused("Mauvais arguments", -1);
 			}
 			
 			connexion = Database.getMySQLConnection();
+			try {
+				if(SessionTool.checkSession(connexion, myUser) == false) {
+					return ErrorJSON.serviceRefused("Session Problem!!!", 10000);
+				}
+			} catch(SQLException e) {
+				
+				return ErrorJSON.serviceRefused(e.toString(), -1);
+			}
+
 			
 			boolean userCheck = UserTool.userExist(connexion, userFriend);		
 			
@@ -96,7 +107,7 @@ public class FriendServices {
 			
 		}
 		catch (SQLException e) {
-			return ErrorJSON.serviceRefused("Erreur avec userExist ou followExist", 1000);
+			return ErrorJSON.serviceRefused("SQL Error", 1000);
 		}
 		finally {
 			try {
