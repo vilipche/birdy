@@ -10,7 +10,9 @@ import org.json.JSONObject;
 public class FriendTool {
 
 
-	
+	/**
+	 * Checks if myUser follows userFollowing
+	 */
 	public static boolean followExist(Connection connexion, String myUser, String userFollowing) throws SQLException {
 		// TODO checks if both arguments are friends in the database;
 		int idMyUser = UserTool.getUserID(connexion, myUser);
@@ -26,6 +28,9 @@ public class FriendTool {
 		return false;
 	}
 
+	/**
+	 * create a relationship between myuser and userFollow
+	 */
 	public static boolean followUser(Connection connexion, String myUser, String userFollow) throws SQLException {
 
 
@@ -44,6 +49,9 @@ public class FriendTool {
 	}
 
 
+	/**
+	 * myUser unfollows userFollow
+	 */
 	public static boolean unfollow(Connection connexion, String myUser, String userFollow) throws SQLException {
 		int idMyUser = UserTool.getUserID(connexion, myUser);
 		int idUserFollowing = UserTool.getUserID(connexion, userFollow);
@@ -60,6 +68,9 @@ public class FriendTool {
 		return false;
 	}
 
+	/**
+	 * return the list of friends of a user
+	 */
 	public static JSONObject getListFriends(Connection connexion, String user) throws SQLException, JSONException {
 		int idMyUser = UserTool.getUserID(connexion, user);
 

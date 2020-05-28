@@ -13,6 +13,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.tools.ErrorJSON;
 import com.tools.MessageTool;
+import com.tools.SessionTool;
 import com.tools.UserTool;
 
 public class MessageServices {
@@ -30,6 +31,15 @@ public class MessageServices {
 
 			connexion = Database.getMySQLConnection();
 
+			//Check if the user session is valid
+			try {
+				if(SessionTool.checkSession(connexion, myUser) == false) {
+					return ErrorJSON.serviceRefused("Session Problem!!!", 10000);
+				}
+			} catch(SQLException e) {
+				return ErrorJSON.serviceRefused(e.toString(), -1);
+			}
+			
 			db = Database.getMongoDBConnection();
 			MongoCollection<Document> messageColl = db.getCollection("message");
 
@@ -82,6 +92,16 @@ public class MessageServices {
 		try {
 
 			connexion = Database.getMySQLConnection();
+			
+			//Check if the user session is valid
+			try {
+				if(SessionTool.checkSession(connexion, user) == false) {
+					return ErrorJSON.serviceRefused("Session Problem!!!", 10000);
+				}
+			} catch(SQLException e) {
+				return ErrorJSON.serviceRefused(e.toString(), -1);
+			}
+			
 			db = Database.getMongoDBConnection();
 			MongoCollection<Document> messageColl = db.getCollection("message");
 
@@ -124,16 +144,33 @@ public class MessageServices {
 
 
 
-	public static JSONObject removeMessage(ObjectId id) {
+	public static JSONObject removeMessage(ObjectId id, String user) {
 
 
+		Connection connexion = null;
 		MongoDatabase db = null;
 
 		if(id == null) {
 			return ErrorJSON.serviceRefused("Mauvais arguments", -1);
 		}
-
+		
+		try {
+			connexion = Database.getMySQLConnection();
+		} catch (SQLException e) {
+			return ErrorJSON.serviceRefused("SQL connection error", 100);
+		}
+		
 		db = Database.getMongoDBConnection();
+		
+		//Check if the user session is valid
+		try {
+			if(SessionTool.checkSession(connexion, user) == false) {
+				return ErrorJSON.serviceRefused("Session Problem!!!", 10000);
+			}
+		} catch(SQLException e) {
+			return ErrorJSON.serviceRefused(e.toString(), -1);
+		}
+		
 		MongoCollection<Document> messageColl = db.getCollection("message");
 
 		//			boolean userCheck = UserTool.userExist(connexion, user);		

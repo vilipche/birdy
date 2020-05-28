@@ -25,7 +25,16 @@ public class FriendServices {
 			if(userFriend == null || myUser == null) {
 				return ErrorJSON.serviceRefused("Mauvais arguments", -1);
 			}
-
+			
+			//Check if the user session is valid
+			try {
+				if(SessionTool.checkSession(connexion, myUser) == false) {
+					return ErrorJSON.serviceRefused("Session Problem!!!", 10000);
+				}
+			} catch(SQLException e) {
+				return ErrorJSON.serviceRefused(e.toString(), -1);
+			}
+			
 			boolean userCheck = UserTool.userExist(connexion, userFriend);		
 
 			if(!userCheck) {
@@ -74,12 +83,13 @@ public class FriendServices {
 			}
 			
 			connexion = Database.getMySQLConnection();
+			
+			//Check if the user session is valid
 			try {
 				if(SessionTool.checkSession(connexion, myUser) == false) {
 					return ErrorJSON.serviceRefused("Session Problem!!!", 10000);
 				}
 			} catch(SQLException e) {
-				
 				return ErrorJSON.serviceRefused(e.toString(), -1);
 			}
 
@@ -132,6 +142,16 @@ public class FriendServices {
 			}
 			
 			connexion= Database.getMySQLConnection();
+			
+			//Check if the user session is valid
+			try {
+				if(SessionTool.checkSession(connexion, user) == false) {
+					return ErrorJSON.serviceRefused("Session Problem!!!", 10000);
+				}
+			} catch(SQLException e) {
+				return ErrorJSON.serviceRefused(e.toString(), -1);
+			}
+
 			
 			boolean userCheck = UserTool.userExist(connexion, user);		
 

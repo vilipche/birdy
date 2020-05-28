@@ -20,9 +20,10 @@ public class Messages extends HttpServlet {
 	
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String idmsg = request.getParameter("idMessage");
+		String user = request.getParameter("user");
 
 		ObjectId oid = new ObjectId(idmsg);
-		JSONObject json = MessageServices.removeMessage(oid);
+		JSONObject json = MessageServices.removeMessage(oid, user);
 				
 		PrintWriter out = response.getWriter();
 		out.println(json.toString());

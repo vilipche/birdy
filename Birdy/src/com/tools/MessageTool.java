@@ -19,6 +19,9 @@ import com.mongodb.client.result.DeleteResult;
 
 public class MessageTool {
 
+	/**
+	 * returns true if the message is less than 140 characters
+	 */
 	public static boolean validMessage(String message) {
 		if(message.length() <=140) {
 			return true;
@@ -26,6 +29,9 @@ public class MessageTool {
 		return false;
 	}
 
+	/**
+	 * Function used to add the message in a collection
+	 */
 	public static boolean addMessage(Connection connexion, MongoCollection<Document> messageColl, String myUser, String message) {
 
 		try {
@@ -55,6 +61,9 @@ public class MessageTool {
 
 	}
 
+	/**
+	 * Find a message with an objectid in a collection
+	 */
 	public static boolean findMessage(MongoCollection<Document> messageColl, ObjectId id) {
 		
 		Document query = new Document();
@@ -68,6 +77,9 @@ public class MessageTool {
 		return false;
 	}
 
+	/**
+	 * Remove the emssage from the collection using an objectid
+	 */
 	public static boolean removeMessage(MongoCollection<Document> messageColl, ObjectId id) {
 		
 		Document query = new Document();
@@ -77,6 +89,10 @@ public class MessageTool {
 		
 	}
 
+	/**
+	 * Return the list of messages of a suer from the collection
+	 */
+	@SuppressWarnings("finally")
 	public static JSONObject getListMessages(Connection connexion, MongoCollection<Document> messageColl, String user) throws JSONException {
 		JSONObject json = null;
 		try {

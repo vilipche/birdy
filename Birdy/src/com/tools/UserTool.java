@@ -6,6 +6,9 @@ import java.sql.Statement;
 
 public class UserTool {
 
+	/**
+	 * @return the UserID from the Database from a username
+	 */
 	public static int getUserID(Connection connexion, String user) throws SQLException {
 		// TODO     
 		String query = "Select idUser From User Where username='"+user+"';";
@@ -19,7 +22,10 @@ public class UserTool {
 		}
 		return id;
 	}
-	
+
+	/**
+	 * @return the username from the Database from an ID
+	 */
 	public static String getUserFromID(Connection connexion, int idUser) throws SQLException {
 		// TODO     
 		String query = "Select username From User Where idUser='"+idUser+"';";
@@ -34,6 +40,9 @@ public class UserTool {
 		return username;
 	}
 	
+	/**
+	 * @return true if the username is in the databse else false
+	 */
 	public static boolean usernameExist(Connection connexion, String username) throws SQLException {
 		String query = "Select * From User u Where u.username='"+username+"';";
 		
@@ -46,6 +55,9 @@ public class UserTool {
 		return false;
 	}
 
+	/**
+	 * @return true if the email exists in the database
+	 */
 	public static boolean emailExist(Connection connexion, String email) throws SQLException {
 		String query = "Select * From User u Where u.email='"+email+"';";
 
@@ -60,6 +72,9 @@ public class UserTool {
 
 
 
+	/**
+	 * @return true if the user is in the database
+	 */
 	public static boolean userExist(Connection connexion, String login) throws SQLException {
 		boolean email = emailExist(connexion, login);
 		boolean user = usernameExist(connexion, login);
@@ -68,6 +83,9 @@ public class UserTool {
 		return email || user;
 	}
 
+	/**
+	 * @return true if the passowrd is in the database
+	 */
 	public static boolean checkPass(Connection connexion, String login, String pass) throws SQLException {
 		String query = "Select * From User u Where u.email='"+login+"' OR u.username='"+login+"' AND u.password='"+pass+"';";
 
@@ -82,6 +100,9 @@ public class UserTool {
 
 
 
+	/**
+	 * @return true if the password matches the critera
+	 */
 	public static boolean checkPasswordValid(String password) {
 
 		if (password.length()<8 && password.length()>24) {
@@ -106,14 +127,6 @@ public class UserTool {
 
 	/**
 	 * Insert user in the database
-	 * @param connexion
-	 * @param username
-	 * @param email
-	 * @param password
-	 * @param name
-	 * @param surname
-	 * @return true if the user was successfully added in the databse
-	 * @throws SQLException
 	 */
 	public static boolean insertUser(Connection connexion, String username, String email, 
 			String password, String name, String surname) throws SQLException {
@@ -132,6 +145,9 @@ public class UserTool {
 
 	}
 
+	/**
+	 * Delete a user from the database 
+	 */
 	public static boolean deleteUser(Connection connexion, String user) throws SQLException {
 		
 		int idUser = getUserID(connexion, user);
@@ -147,6 +163,10 @@ public class UserTool {
 		return false;
 	}
 	
+
+	/**
+	 * @return true if the password exists for the given username
+	 */	
 	public static boolean checkPasswordExist(Connection connexion, String username, String password) throws SQLException {
 		String query = "Select * From User u "
 				+ "Where u.username='"+username+"' AND u.password='"+password+"';";

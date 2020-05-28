@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import com.bd.*;
 import com.tools.ErrorJSON;
+import com.tools.SessionTool;
 import com.tools.UserTool;
 
 /*
@@ -35,7 +36,7 @@ public class UserServices {
 
 		try {	
 			connexion= Database.getMySQLConnection();
-
+			
 			boolean is_username = UserTool.usernameExist(connexion, username);
 			if(is_username) {
 				return ErrorJSON.serviceRefused("User already taken", 0);
@@ -87,6 +88,7 @@ public class UserServices {
 
 		try {	
 			connexion= Database.getMySQLConnection();
+			
 
 			boolean is_username = UserTool.usernameExist(connexion, username);
 			if(!is_username) {
