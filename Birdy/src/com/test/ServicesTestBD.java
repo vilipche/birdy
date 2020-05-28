@@ -4,6 +4,8 @@ import com.tools.*;
 
 import java.util.Random;
 
+import org.bson.types.ObjectId;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,16 +14,17 @@ import java.sql.Statement;
 import com.bd.DBStatic;
 import com.bd.Database;
 import com.services.friends.FriendServices;
+import com.services.messages.MessageServices;
 import com.services.session.SessionServices;
 import com.services.user.UserServices;
 
 public class ServicesTestBD {
 
-	public static void main(String[] args) {
-
+	public static void main(String[] args) throws SQLException {
+		Connection connexion = null;
 		try {
 			
-			Connection connexion = Database.getMySQLConnection();
+			connexion = Database.getMySQLConnection();
 			//UserServices -> Works
 //			System.out.println(UserServices.newUser("a", "a", "Aaaaaaaa123", "Aa", "Aaa"));
 //			System.out.println(UserServices.removeUser("a", "a", "Aaaaaaaa123"));
@@ -35,13 +38,20 @@ public class ServicesTestBD {
 //			System.out.println(FriendServices.unFollow("a", "toto"));
 //			System.out.println(FriendServices.listFriends("a"));
 			
+			//MessageServices -> Works
+//			System.out.println(MessageServices.addMessage("a", "ASDASDASDASDASDASDAS"));
+//			System.out.println(MessageServices.listMessages("a"));
+//			System.out.println(MessageServices.removeMessage(new ObjectId("5ed0277660faba05b4c85451"), "a"));
+			
 			//On delete cascade -> Works
 //			System.out.println(UserServices.removeUser("a", "a", "Aaaaaaaa123"));
 			
-//			System.out.println(SessionServices.login("vilipche", "123ABCabc"));
+
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			connexion.close();
 		}
 
 

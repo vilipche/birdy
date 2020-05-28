@@ -9,7 +9,7 @@ public class SessionTool {
 
 	private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-	private static final int SESSION_LIMIT = 30;
+	private static final int SESSION_LIMIT = 300;
 	
 	/**
 	 * Function for creating na alphanumeric key 
@@ -84,14 +84,12 @@ public class SessionTool {
 		} catch(SQLException e) {
 			System.out.println("GETKEY ERROR");
 		}
-		System.out.println("A");
 		
 		if(sessionKey == null) {
 			System.out.println("Check getKey function");
 			return false;
 		} 
-		System.out.println("B");
-		System.out.println(sessionKey);
+
 		// we get the login time of the session
 		String sessionQuery = "Select dateLogin FROM Session WHERE sessionKey = '"+sessionKey+"';";
 		Statement lecture = connexion.createStatement();
@@ -106,13 +104,11 @@ public class SessionTool {
 			return false;
 		}
 		
-		System.out.println("C");
 		//We get the time difference between the session and current time
 		String queryDifference = "SELECT TIMESTAMPDIFF(SECOND, '"+sessionTime+"' , CURRENT_TIMESTAMP) AS difference";	
 		lecture = connexion.createStatement();
 		rs = lecture.executeQuery(queryDifference);
 		
-		System.out.println("D");
 		int difference = 0;
 		while (rs.next()) {
 			difference = rs.getInt("difference");
