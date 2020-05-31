@@ -25,12 +25,13 @@ public class ServicesTestBD {
 		try {
 			
 			connexion = Database.getMySQLConnection();
+
 			//UserServices -> Works
-//			System.out.println(UserServices.newUser("a", "a", "Aaaaaaaa123", "Aa", "Aaa"));
+			System.out.println(UserServices.newUser("b", "b", "Aaaaaaaa123", "Aa", "Aaa"));
 //			System.out.println(UserServices.removeUser("a", "a", "Aaaaaaaa123"));
 			
 			//SessionServices -> Works
-//			System.out.println(SessionServices.login("a", "Aaaaaaaa123"));
+			System.out.println(SessionServices.login("b", "Aaaaaaaa123"));
 //			System.out.println(SessionServices.logout("a"));
 			
 			//FriendServices -> Works
@@ -39,7 +40,7 @@ public class ServicesTestBD {
 //			System.out.println(FriendServices.listFriends("a"));
 			
 			//MessageServices -> Works
-//			System.out.println(MessageServices.addMessage("a", "ASDASDASDASDASDASDAS"));
+			System.out.println(MessageServices.addMessage("b", "ASDASDASDASDASDASDAS"));
 //			System.out.println(MessageServices.listMessages("a"));
 //			System.out.println(MessageServices.removeMessage(new ObjectId("5ed0277660faba05b4c85451"), "a"));
 			
